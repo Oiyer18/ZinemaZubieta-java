@@ -79,6 +79,7 @@ public class Zinemazubieta {
                             System.out.println(egunak[aukeguna-1]+ " eguneko kartelera aldatu nahi badezu zineman egin behar dezu lan, sartu kontraseka(1-9 zenaki bat");
                             if(sc.nextInt()==8){
                                 aldat='B';
+                                //Kartelera aldatzeko aukera eman soilik aldat=B bada
                                 while(aldat!='E'){
                                     aukaldat=0;
                                     System.out.println("Zein pelikula aldatu nahi duzu?");
@@ -106,10 +107,10 @@ public class Zinemazubieta {
 
                     break;
                 case 3:
-
+                            System.out.println("Zubieta zinema helbidea: Etarte bidea 9, 20170 Zubieta-Usurbil (Gipuzkoa)");
                     break;
                 case 4:
-
+                            System.out.println(" ASTEAN ZEHAR: 15:00 - 00:00\n ASTEBURUAK 12:00 - 00:00");
                     break;
                 case 5:
                     System.out.println("Eskerrikasko erabiltzeagatik");
