@@ -15,12 +15,13 @@ public class Zinemazubieta {
                 "Wolfgang (Extraordinario)", "El casoplón", "Un funeral de locos", "Sirāt" },
                 gelak = { "Umeen gela", "Superheroien gela", "thriller gela", "Zientzia fikzio gela", "komedia gela" },
                 egunak = { "astelehena", "asteartea", "asteazkena", "osteguna", "ostirala", "larunbata", "igandea" };
-        int[] astelehena = new int[4], asteartea = new int[4], asteazkena = new int[4], osteguna = new int[4],
-                ostirala = new int[4], larunbata = new int[4], igandea = new int[4];
+        int[] astelehena = new int[5], asteartea = new int[5], asteazkena = new int[5], osteguna = new int[5],
+                ostirala = new int[5], larunbata = new int[5], igandea = new int[5];
         //Kartelera matrizea sortu det eta posizio bakoitzan asteko egun bakoitzaren array-a, hau da egun horretan egongo diren pelikulak gordetzen dira
-        int[][] kartelera = new int[6][4];
+        int[][] kartelera = new int[7][5];
+        char aldat='E';
         kartelera[0]=astelehena; kartelera[1]=asteartea; kartelera[2]=asteazkena; kartelera[3]=osteguna;kartelera[4]=ostirala;kartelera[5]=larunbata;kartelera[6]=igandea;
-        int auk = 0, def = 0;
+        int auk = 0, def = 0, aukeguna=0, aukaldat=0;
         // asteko egun bakoitzari 5 pelikula random esleitzen dizkio, i zenbakia izango
         // da pelikulak[i] dagoen pelikula
         for (int i = 0; i < astelehena.length; i++) {
@@ -49,8 +50,44 @@ public class Zinemazubieta {
             switch (auk) {
                 case 1:
                     System.out.println(
+                        //Asteko egunen zerrenda imprimatuko du.
                             "---------ASTEKO EGUNAK---------\n 1.Astelehena\n 2.Asteartea\n 3.Asteazkena\n 4.Osteguna\n 5.Ostirala\n 6.Larunbata\n 7.Igandea\n---------------------------");
-
+                            aukeguna=0;
+                            while(aukeguna<=0||aukeguna>7){
+                                aukeguna=sc.nextInt();
+                                if(aukeguna<=0||aukeguna>7){
+                                 System.out.println("Sartutako aukera ez dago ondo, faborez sartu baliozkoa den aukera bat.");
+                                }
+                            }
+                            //Aukeratutako egunean dauden pelikulak inprimatuko ditu.
+                            System.out.println(egunak[aukeguna-1]+" egunean proiektatuko diren pelikulak:");
+                            for(int i=0;i<astelehena.length;i++){
+                                System.out.println((i+1)+". "+pelikulak[kartelera[aukeguna-1][i]]);
+                            }
+                            //Eguneko kartelera aldatu daiteke, beraz aldatzeko aukera eman, baino soilik kontraseña ondo jartzen badezu
+                            System.out.println(egunak[aukeguna]+ " eguneko kartelera aldatu nahi badezu zineman egin behar dezu lan, sartu kontraseka(1-9 zenaki bat");
+                            if(sc.nextInt()==8){
+                                while(aldat!='E'){
+                                    System.out.println("Zein pelikula aldatu nahi duzu?");
+                                    while(aukaldat<=0||aukaldat>astelehena.length){
+                                        aukaldat=sc.nextInt();
+                                        if(aukaldat<=0||aukaldat>astelehena.length){
+                                            System.out.println("Aukera ez da egokia, faborez sartu egokia den aukera bat.");
+                                        }
+                                    }
+                                    System.out.println(pelikulak[kartelera[aukeguna-1][aukaldat-1]]+" pelikula aldatu nahi duzu, zer pelikulagatik aldatu nahi duzu? hauek dira pelikula guztiak:");
+                                     System.out.println("------------PELIKULAK------------");
+                                    for(int i=0;i<pelikulak.length;i++){
+                                       System.out.println((i+1)+". "+pelikulak[i]);
+                                    }
+                                    kartelera[aukeguna-1][aukaldat-1] = sc.nextInt()-1;
+                                    System.out.println("Beste pelikularik aldatu nahi duzu? (B/E)");
+                                    aldat=sc.next().charAt(0);
+                                }
+                            }   
+                            else{
+                                System.out.println("Ez duzu hemen lana egiten beraz ezin duzu kartelera aldatu.");
+                            }
                     break;
                 case 2:
 
