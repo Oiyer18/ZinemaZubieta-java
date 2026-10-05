@@ -19,7 +19,7 @@ public class Zinemazubieta {
                 ostirala = new int[5], larunbata = new int[5], igandea = new int[5];
         //Kartelera matrizea sortu det eta posizio bakoitzan asteko egun bakoitzaren array-a, hau da egun horretan egongo diren pelikulak gordetzen dira
         int[][] kartelera = new int[7][5];
-        char aldat='E';
+        char aldat='B';
         kartelera[0]=astelehena; kartelera[1]=asteartea; kartelera[2]=asteazkena; kartelera[3]=osteguna;kartelera[4]=ostirala;kartelera[5]=larunbata;kartelera[6]=igandea;
         int auk = 0, def = 0, aukeguna=0, aukaldat=0;
         // asteko egun bakoitzari 5 pelikula random esleitzen dizkio, i zenbakia izango
