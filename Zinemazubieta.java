@@ -14,9 +14,11 @@ public class Zinemazubieta {
                 "Misión: Imposible. Sentencia Final", "Blancanieves", "Thunderbolt", "Padre no hay más que uno 5",
                 "Wolfgang (Extraordinario)", "El casoplón", "Un funeral de locos", "Sirāt" },
                 gelak = { "Umeen gela", "Superheroien gela", "thriller gela", "Zientzia fikzio gela", "komedia gela" },
-                egunak = { "astelehena", "asteartea", "asteazkena", "osteguna", "ostirala", "larunbata", "igandea" };
+                egunak = { "astelehena", "asteartea", "asteazkena", "osteguna", "ostirala", "larunbata", "igandea" },
+                orduakaste={"15:00","17:00","19:00","21:00","23:00"},
+                orduakbuk={"12:00","14:00","16:00","18:00","20:00","22:00"};
         int[] astelehena = new int[5], asteartea = new int[5], asteazkena = new int[5], osteguna = new int[5],
-                ostirala = new int[5], larunbata = new int[5], igandea = new int[5];
+                ostirala = new int[5], larunbata = new int[5], igandea = new int[5], generoak={0,0,0,0,1,2,3,2,0,0,4,2,2,4,2};
         //Kartelera matrizea sortu det eta posizio bakoitzan asteko egun bakoitzaren array-a, hau da egun horretan egongo diren pelikulak gordetzen dira
         int[][] kartelera = new int[7][5];
         char aldat='B';
@@ -25,13 +27,13 @@ public class Zinemazubieta {
         // asteko egun bakoitzari 5 pelikula random esleitzen dizkio, i zenbakia izango
         // da pelikulak[i] dagoen pelikula
         for (int i = 0; i < astelehena.length; i++) {
-            astelehena[i] = (int) (Math.random() * 16);
-            asteartea[i] = (int) (Math.random() * 16);
-            asteazkena[i] = (int) (Math.random() * 16);
-            osteguna[i] = (int) (Math.random() * 16);
-            ostirala[i] = (int) (Math.random() * 16);
-            larunbata[i] = (int) (Math.random() * 16);
-            igandea[i] = (int) (Math.random() * 16);
+            astelehena[i] = (int) (Math.random() * 15);
+            asteartea[i] = (int) (Math.random() * 15);
+            asteazkena[i] = (int) (Math.random() * 15);
+            osteguna[i] = (int) (Math.random() * 15);
+            ostirala[i] = (int) (Math.random() * 15);
+            larunbata[i] = (int) (Math.random() * 15);
+            igandea[i] = (int) (Math.random() * 15);
         }
         System.out.println("Ongi etorri ZinemaZubietara!!");
         // def aldagaia kontrolatuko du menua berriro erakustea funtzio bat egin ondoren
@@ -61,13 +63,24 @@ public class Zinemazubieta {
                             }
                             //Aukeratutako egunean dauden pelikulak inprimatuko ditu.
                             System.out.println(egunak[aukeguna-1]+" egunean proiektatuko diren pelikulak:");
-                            for(int i=0;i<astelehena.length;i++){
-                                System.out.println((i+1)+". "+pelikulak[kartelera[aukeguna-1][i]]);
-                            }
+                            //Astean zenhar den kontrolatzen du zeren astean zehar ezin dira pelikulak proiektatu 15:00 baino lehen
+                            if(aukeguna<6){
+                                for(int i=0;i<astelehena.length;i++){
+                                    System.out.println((i+1)+". "+pelikulak[kartelera[aukeguna-1][i]]+ " pelikula-------------- "+gelak[generoak[i]]+" gelan proiektatuko da--------------"+(15+2*i)+":00 etan.");
+                                }
+                            }  
+                            //Asteburua den kontrolatu
+                            else{
+                                for(int i=0;i<astelehena.length;i++){
+                                    System.out.println((i+1)+". "+pelikulak[kartelera[aukeguna-1][i]]+ " pelikula--------------"+gelak[generoak[i]]+" gelan proiektatuko da--------------"+(12 +2*i)+":00 etan.");
+                                }
+                            } 
                             //Eguneko kartelera aldatu daiteke, beraz aldatzeko aukera eman, baino soilik kontraseña ondo jartzen badezu
-                            System.out.println(egunak[aukeguna]+ " eguneko kartelera aldatu nahi badezu zineman egin behar dezu lan, sartu kontraseka(1-9 zenaki bat");
+                            System.out.println(egunak[aukeguna-1]+ " eguneko kartelera aldatu nahi badezu zineman egin behar dezu lan, sartu kontraseka(1-9 zenaki bat");
                             if(sc.nextInt()==8){
+                                aldat='B';
                                 while(aldat!='E'){
+                                    aukaldat=0;
                                     System.out.println("Zein pelikula aldatu nahi duzu?");
                                     while(aukaldat<=0||aukaldat>astelehena.length){
                                         aukaldat=sc.nextInt();
