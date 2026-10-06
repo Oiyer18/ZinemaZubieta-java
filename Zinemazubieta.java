@@ -18,12 +18,13 @@ public class Zinemazubieta {
                 orduakaste={"15:00","17:00","19:00","21:00","23:00"},
                 orduakbuk={"12:00","14:00","16:00","18:00","20:00","22:00"};
         int[] astelehena = new int[5], asteartea = new int[5], asteazkena = new int[5], osteguna = new int[5],
-                ostirala = new int[5], larunbata = new int[5], igandea = new int[5], generoak={0,0,0,0,1,2,3,2,0,0,4,2,2,4,2};
+                ostirala = new int[5], larunbata = new int[5], igandea = new int[5], generoak={0,0,0,0,1,2,3,2,0,0,4,2,2,4,2},
+                erositakosarr = new int[3];
         //Kartelera matrizea sortu det eta posizio bakoitzan asteko egun bakoitzaren array-a, hau da egun horretan egongo diren pelikulak gordetzen dira
         int[][] kartelera = new int[7][5];
-        char aldat='B';
+        char aldat='B', aukeraeros='B';
         kartelera[0]=astelehena; kartelera[1]=asteartea; kartelera[2]=asteazkena; kartelera[3]=osteguna;kartelera[4]=ostirala;kartelera[5]=larunbata;kartelera[6]=igandea;
-        int auk = 0, def = 0, aukeguna=0, aukaldat=0;
+        int auk = 0, def = 0, aukeguna=0, aukaldat=0, sarrerakont=0, sarrera=0,erositakosar=0;
         // asteko egun bakoitzari 5 pelikula random esleitzen dizkio, i zenbakia izango
         // da pelikulak[i] dagoen pelikula
         for (int i = 0; i < astelehena.length; i++) {
@@ -98,21 +99,60 @@ public class Zinemazubieta {
                                     System.out.println("Beste pelikularik aldatu nahi duzu? (B/E)");
                                     aldat=sc.next().charAt(0);
                                 }
-                            }   
+                            } 
+                            //Ez daki kontraseña beraz ez du hemen lana egiten  
                             else{
                                 System.out.println("Ez duzu hemen lana egiten beraz ezin duzu kartelera aldatu.");
+                            }
+                            //Sarrerak erosteko aukera hemen
+                            System.out.println("SARRERAK EROSI NAHI DITUZU? GEHIENEZ 4 AHAL DITUZU EROSI (B/E)");
+                            aukeraeros=sc.next().charAt(0);
+                            if(aukeraeros=='B'){
+                                System.out.println("Zein pelikularentzat erosi nahi dituzu sarrerak?");
+                                aukeraeros='B';
+                                while(aukeraeros=='B'&& sarrerakont<5){
+                                    //Astean zenhar den kontrolatzen du zeren astean zehar ezin dira pelikulak proiektatu 15:00 baino lehen
+                                     if(aukeguna<6){
+                                        for(int i=0;i<astelehena.length;i++){
+                                        System.out.println((i+1)+". "+pelikulak[kartelera[aukeguna-1][i]]+ " pelikula-------------- "+gelak[generoak[i]]+" gelan proiektatuko da--------------"+(15+2*i)+":00 etan.");
+                                        }
+                                     }   
+                                    //Asteburua den kontrolatu
+                                       else{
+                                       for(int i=0;i<astelehena.length;i++){
+                                         System.out.println((i+1)+". "+pelikulak[kartelera[aukeguna-1][i]]+ " pelikula--------------"+gelak[generoak[i]]+" gelan proiektatuko da--------------"+(12 +2*i)+":00 etan.");
+                                       }
+                                     } 
+                                     erositakosarr[erositakosar]=sc.nextInt();
+                                     erositakosar++;
+                                     System.out.println("Zenbat sarrera erosi nahi dituzu?");
+                                     sarrera=sc.nextInt();
+                                     sarrerakont=sarrerakont+sarrera;
+                                    if(sarrerakont>5){
+                                        System.out.println("5 sarrera baino gehiago erosi dituzu, beraz erositako azkenak murriztu zaizkizu.");
+                                        sarrerakont=5;
+                                    }
+                                    System.out.println("Beste pelikula batentzat sarrerak erosi nahi dituzu? (B/E) gogoratu 5 direla maximoa eta zuk "+ sarrerakont+" dituzula jada");
+                                    aukeraeros=sc.next().charAt(0);
+                                    if(aukeraeros=='E'){
+                                        System.out.println("Eskerrikasko ZinemaZubietan erosteagatik");
+                                    }
+                                }
                             }
                     break;
                 case 2:
 
                     break;
                 case 3:
+                    //Helbidea imprimatzeko funtzioa.
                             System.out.println("Zubieta zinema helbidea: Etarte bidea 9, 20170 Zubieta-Usurbil (Gipuzkoa)");
                     break;
                 case 4:
+                    //Ordutegia imprimatzeko funtzioa.
                             System.out.println(" ASTEAN ZEHAR: 15:00 - 00:00\n ASTEBURUAK 12:00 - 00:00");
                     break;
                 case 5:
+                    //Programa amaitzeko aukera.
                     System.out.println("Eskerrikasko erabiltzeagatik");
                     def = 1;
                     break;
