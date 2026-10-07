@@ -178,39 +178,16 @@ public class Zinemazubieta {
                     }
                     break;
                 case 2:
-                    //Pelikulen informazioa erakutsi, hasteko gela eta pelikula kopurua
-                    System.out.println("-----------PELIKULEN INFORMAZIOA-----------\n Pelikula kopurua: "
-                            + pelikulak.length + "\n Gelen Kopurua: " + gelak.length + "\n");
-                    System.out.println("-----------"+gelak[0].toUpperCase()+"-----------");
-                    for(int i=0;i<pelikulak.length;i++){
-                        if(generoak[i]==0){
-                            System.out.println(pelikulak[i]);
-                        }
-                    }
-                     System.out.println("-----------"+gelak[1].toUpperCase()+"-----------");
-                    for(int i=0;i<pelikulak.length;i++){
-                        if(generoak[i]==1){
-                            System.out.println(pelikulak[i]);
-                        }
-                    }
-                     System.out.println("-----------"+gelak[2].toUpperCase()+"-----------");
-                    for(int i=0;i<pelikulak.length;i++){
-                        if(generoak[i]==2){
-                            System.out.println(pelikulak[i]);
-                        }
-                    }
-                     System.out.println("-----------"+gelak[3].toUpperCase()+"-----------");
-                    for(int i=0;i<pelikulak.length;i++){
-                        if(generoak[i]==3){
-                            System.out.println(pelikulak[i]);
-                        }
-                    }
-                     System.out.println("-----------"+gelak[4].toUpperCase()+"-----------");
-                    for(int i=0;i<pelikulak.length;i++){
-                        if(generoak[i]==4){
-                            System.out.println(pelikulak[i]);
-                        }
-                    }
+                    //Pelikulen informazioa erakutsi, aasteko gela eta pelikula kopurua
+                    System.out.println("-----------PELIKULEN INFORMAZIOA-----------\n Pelikula kopurua: " + pelikulak.length + "\n Gelen Kopurua: " + gelak.length + "\n");
+                            for(int g=0; g<5;g++){   
+                                System.out.println("-----------"+gelak[g].toUpperCase()+"-----------"); 
+                             for(int i=0;i<pelikulak.length;i++){
+                                if(generoak[i]==g){
+                                 System.out.println(pelikulak[i]);
+                                }
+                              }
+                            }
                     break;
                 case 3:
                     // Helbidea imprimatzeko funtzioa.
@@ -222,6 +199,7 @@ public class Zinemazubieta {
                     break;
                 case 5:
                     // Programa amaitzeko aukera.
+                    //Erosi dituzun sarreren tiketa
                     if(sarrerakont!=0){
                         System.out.println("-------------ZURE TIKETA-------------\n");
                         System.out.println("Eguna:"+egunak[aukeguna-1]);
@@ -233,9 +211,11 @@ public class Zinemazubieta {
                         System.out.println("--------------------------------------------------");
                     }
                     System.out.println("Eskerrikasko erabiltzeagatik");
+                    //Programa exekutatu soiluk def=0  bada
                     def = 1;
                     break;
             }
+            //auk aldagaia inizializatu bazpaere
             auk = 0;
         }
         sc.close();
