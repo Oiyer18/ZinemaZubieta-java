@@ -30,7 +30,7 @@ public class Zinemazubieta {
         kartelera[4] = ostirala;
         kartelera[5] = larunbata;
         kartelera[6] = igandea;
-        int auk = 0, def = 0, aukeguna = 0, aukaldat = 0, sarrerakont = 0, sarrerakop = 0, erositakosar = 0, aukeros=0;
+        int auk = 0, def = 0, aukeguna = 0, aukaldat = 0, sarrerakont = 0, sarrerakop = 0, erositakosar = 0, aukeros=0,sarreraken=0;
         // asteko egun bakoitzari 5 pelikula random esleitzen dizkio, i zenbakia izango
         // da pelikulak[i] dagoen pelikula
         for (int i = 0; i < astelehena.length; i++) {
@@ -150,8 +150,12 @@ public class Zinemazubieta {
                             //sarrerakont-->erosi diren sarrera kopuru totala
                             sarrerakont = sarrerakont + sarrerakop;    
                           if (sarrerakont >= 4) {
-                                System.out.println("4 sarrera edo gehiago erosi dituzu, beraz erositako azkenak murriztu zaizkizu.");
-                                int sarreraken=0;
+                                if(sarrerakont ==4){
+                                    System.out.println("4 sarrera erosi dituzu jada, beraz sartutako azkenekoak ez dira kontuan eduki");
+                                }
+                                if(sarrerakont > 4){
+                                    System.out.println("4 sarrera edo gehiago erosi dituzu, beraz erositako azkenak murriztu zaizkizu.");
+                                }
                                  for(int i=0; i<sarrerak.length;i++){
                                     if(i!=erositakosar){
                                      sarreraken=sarreraken+sarrerak[i];
