@@ -15,11 +15,10 @@ public class Zinemazubieta {
          // asteko egun bakoitzarentzat array bat sortu han eguneko pelikulak gordeko ditugulako
         int[] astelehena = new int[5], asteartea = new int[5], asteazkena = new int[5], osteguna = new int[5],
                 ostirala = new int[5], larunbata = new int[5], igandea = new int[5],
-                generoak = { 0, 0, 0, 0, 1, 2, 3, 2, 0, 0, 4, 2, 2, 4, 2 }, sarrerak = new int[5],
-                erositakosarr = new int[5];
+                generoak = { 0, 0, 0, 0, 1, 2, 3, 2, 0, 0, 4, 2, 2, 4, 2 };
         // Kartelera matrizea sortu det eta posizio bakoitzan asteko egun bakoitzaren
         //  array-a, hau da egun horretan egongo diren pelikulak gordetzen dira
-        int[][] kartelera = new int[7][5];
+        int[][] kartelera = new int[7][5],sarrerak = new int[7][5];
         char aldat = 'B', aukeraeros = 'B';
         kartelera[0] = astelehena;
         kartelera[1] = asteartea;
@@ -28,7 +27,7 @@ public class Zinemazubieta {
         kartelera[4] = ostirala;
         kartelera[5] = larunbata;
         kartelera[6] = igandea;
-        int auk = 0, def = 0, aukeguna = 0, aukaldat = 0, sarrerakont = 0, sarrerakop = 0, erositakosar = 0,
+        int auk = 0, def = 0, aukeguna = 0, aukaldat = 0, sarrerakont = 0, sarrerakop = 0,
          aukeros = 0, sarreraken = 0,aldataukpelik=0;
         // asteko egun bakoitzari 5 pelikula random esleitzen dizkio
         for (int i = 0; i < astelehena.length; i++) {
@@ -51,7 +50,7 @@ public class Zinemazubieta {
                         "-----------MENU NAGUSIA-----------\n 1.Asteko eguna aukeratu\n 2.Zinemaren informazio orokorra\n 3.Kokapena\n 4.Irekiera ordutegia\n 5.Irten\n----------------------------------");
                 auk = sc.nextInt();
                 //sartutako aukera baliozkoa den edo ez kontrolatu
-                if (auk <= 0 || auk > 5) {
+                if (auk <= 0 || auk > 6) {
                     System.out.println("Sartutako aukera ez da existitzen, faborez baliozko bat aukeratu");
                 }
             }
@@ -71,6 +70,7 @@ public class Zinemazubieta {
                     }
                     // Aukeratutako egunean dauden pelikulak inprimatuko ditu.
                     System.out.println(" "+egunak[aukeguna - 1] + " egunean proiektatuko diren pelikulak:");
+                  
                     // Astean zenhar den kontrolatzen du zeren astean zehar ezin dira pelikulak
                     // proiektatu 15:00 baino lehen
                     if (aukeguna < 6) {
@@ -139,10 +139,7 @@ public class Zinemazubieta {
                     System.out.println("SARRERAK EROSI NAHI DITUZU? GEHIENEZ 4 AHAL DITUZU EROSI (B/E)");
                     //aukeraerosen gorde ea sarrerak erosi nahi dituen ala ez
                     aukeraeros = sc.next().charAt(0);
-                    if (aukeraeros == 'B' && sarrerakont < 5) {
-
-                        while (erositakosar < erositakosarr.length && aukeraeros == 'B') {
-                            // erositakosarr-->array bat nun gordeko diren zein pelikulen sarrerak erosiko diren
+                        while (aukeraeros == 'B'&& sarrerakont<4) {
                             // erositakosar--> Posizioa
                             System.out.println("Zein pelikularentzat erosi nahi dituzu sarrerak?");
                             //Egun horretan proiektatuko diren pelikula guztiak imprimatuko dira genereo eta orduekin
@@ -172,41 +169,33 @@ public class Zinemazubieta {
                                     System.out.println("Aukera ez da egokia, faborez sartu egokia den aukera bat.");
                                 }
                             }
-                            erositakosarr[erositakosar] = kartelera[aukeguna - 1][aukeros - 1];
                             System.out.println("Zenbat sarrera erosi nahi dituzu?");
                             // Sarrerakop-->erositakosarr[erositakosar] pelikularentzat erosiko diren
                             // sarrera kopurua
                             // sarreral--> array-an gordeko da Sarrerakop
                             sarrerakop = sc.nextInt();
-                            sarrerak[erositakosar] = sarrerakop;
-                            // sarrerakont-->erosi diren sarrera kopuru totala
-                            sarrerakont = sarrerakont + sarrerakop;
-                            // Erosi daitezken sarrera guztiak erosi dituzu
-                            if (sarrerakont >= 4) {
-                                if (sarrerakont == 4) {
-                                    System.out.println(
-                                            "4 sarrera erosi dituzu jada, beraz sartutako azkenekoak ez dira kontuan eduki");
+                            if(sarrerakont+sarrerakop>=4){
+                                if(sarrerakont+sarrerakop==4){
+                                    System.out.println("4 sarrera dituzu");
+                                    sarrerak[aukeguna-1][aukeros-1]=sarrerakop;
+                                    sarrerakont=sarrerakont+sarrerakop;
                                 }
-                                else {
-                                    System.out.println(
-                                            "4 sarrera edo gehiago erosi dituzu, beraz erositako azkenak murriztu zaizkizu.");
+                                else if(sarrerakont+sarrerakop>4){
+                                    System.out.println("Erositako sarrera kopurua 4 baino gehiago da, beraz azkeneko pelikularen sarrerak murriztu zaizkizu.");
+                                    sarrerak[aukeguna-1][aukeros-1]=4-sarrerakont;
+                                    sarrerakont=4;
                                 }
-                                for (int i = 0; i < sarrerak.length; i++) {
-                                    if (i != erositakosar) {
-                                        //hemen sarreraken hartuko du azkeneko pelikularentzat erosi diren sarrera kopurua 
-                                        sarreraken = sarreraken + sarrerak[i];
-                                    }
-                                }
-                                //Erosi daitezken sarrera kopurua edo gehiago erosi badituzu 
-                                // pasa zean pelikularen sarrera kopurua murriztuko da 4 izan dadin erositako sarrera kopuru totala
-                                sarrerak[erositakosar] = 4 - sarreraken;
-                                sarrerakont = 4;
                                 aukeraeros = 'E';
                             }
-                            erositakosar++;
+                            
+                           
+                                //Erosi daitezken sarrera kopurua edo gehiago erosi badituzu 
+                                // pasa zean pelikularen sarrera kopurua murriztuko da 4 izan dadin erositako sarrera kopuru totala
                             // Sarrera gehiago erosi ditzazkezu beraz aukera ematen dizu.
-                            if (sarrerakont < 4) {
-                                System.out.println(
+                            if (sarrerakont+sarrerakop < 4) {
+                                    sarrerak[aukeguna-1][aukeros-1] = sarrerakop;
+                                    sarrerakont = sarrerakont + sarrerakop;
+                                    System.out.println(
                                         "Beste pelikula batentzat sarrerak erosi nahi dituzu? (B/E) gogoratu 4 direla maximoa eta zuk "
                                                 + sarrerakont + " dituzula jada");
                                 aukeraeros = sc.next().charAt(0);
@@ -214,11 +203,12 @@ public class Zinemazubieta {
                                     System.out.println("Eskerrikasko ZinemaZubietan erosteagatik");
                                 }
                             }
+                           
                         }
-                    }
+
                     break;
                 case 2:
-                    // Pelikulen informazioa erakutsi, aasteko gela eta pelikula kopurua
+                    // Pelikulen informazioa erakutsi, asteko gela eta pelikula kopurua
                     System.out.println("-----------PELIKULEN INFORMAZIOA-----------\n Pelikula kopurua: "
                             + pelikulak.length + "\n Gelen Kopurua: " + gelak.length + "\n");
                     for (int g = 0; g < gelak.length; g++) {
@@ -228,7 +218,9 @@ public class Zinemazubieta {
                                 System.out.println(pelikulak[i]);
                             }
                         }
+                    
                     }
+                    System.out.println("\n");
                     break;
                 case 3:
                     // Helbidea imprimatzeko funtzioa.
@@ -238,16 +230,16 @@ public class Zinemazubieta {
                     // Ordutegia imprimatzeko funtzioa.
                     System.out.println(" ASTEAN ZEHAR: 15:00 - 00:00\n ASTEBURUAK 12:00 - 00:00");
                     break;
-                case 5:
-                    // Programa amaitzeko aukera.
-                    // Erosi dituzun sarreren tiketa
-                    if (sarrerakont != 0) {
+                    case 5:
+                        // Programa amaitzeko aukera.
+                        // Erosi dituzun sarreren tiketa
+                        if (sarrerakont != 0) {
                         System.out.println("-------------ZURE TIKETA-------------\n");
-                        System.out.println("Eguna:" + egunak[aukeguna - 1]);
-                        for (int i = 0; i < erositakosarr.length; i++) {
-                            if (sarrerak[i] > 0) {
-                                System.out.println((i + 1) + ". " + pelikulak[erositakosarr[i]]
-                                        + "---------------- sarrera kop: " + sarrerak[i]);
+                        for(int i=0;i<7;i++){
+                            for(int j=0;j<5;j++){
+                                if(sarrerak[i][j]!=0){
+                                    System.out.println("Eguna: "+egunak[i]+", Pelikula: "+pelikulak[kartelera[i][j]]+", Sarrera kopurua: "+sarrerak[i][j]);
+                                }
                             }
                         }
                         System.out.println("--------------------------------------------------");
