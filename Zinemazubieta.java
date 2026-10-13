@@ -28,7 +28,7 @@ public class Zinemazubieta {
         kartelera[5] = larunbata;
         kartelera[6] = igandea;
         int auk = 0, def = 0, aukeguna = 0, aukaldat = 0, sarrerakont = 0, sarrerakop = 0,
-         aukeros = 0,aldataukpelik=0;
+         aukeros = 0,aldataukpelik=0, saiokop=astelehena.length;
         // asteko egun bakoitzari 5 pelikula random esleitzen dizkio
         for (int i = 0; i < astelehena.length; i++) {
             astelehena[i] = (int) (Math.random() * 15);
@@ -69,25 +69,7 @@ public class Zinemazubieta {
                         }
                     }
                     // Aukeratutako egunean dauden pelikulak inprimatuko ditu.
-                    System.out.println(" "+egunak[aukeguna - 1] + " egunean proiektatuko diren pelikulak:");
-                  
-                    // Astean zenhar den kontrolatzen du zeren astean zehar ezin dira pelikulak
-                    // proiektatu 15:00 baino lehen
-                    if (aukeguna < 6) {
-                        for (int i = 0; i < astelehena.length; i++) {
-                            System.out.println((i + 1) + ". " + pelikulak[kartelera[aukeguna - 1][i]]
-                                    + " -------------- " + gelak[generoak[kartelera[aukeguna - 1][i]]]
-                                    + " --------------" + (15 + 2 * i) + ":00 etan.");
-                        }
-                    }
-                    // Asteburua den kontrolatu
-                    else {
-                        for (int i = 0; i < astelehena.length; i++) {
-                            System.out.println((i + 1) + ". " + pelikulak[kartelera[aukeguna - 1][i]]
-                                    + " --------------" + gelak[generoak[kartelera[aukeguna - 1][i]]]
-                                    + " --------------" + (12 + 2 * i) + ":00 etan.");
-                        }
-                    }
+                    Kartelera(aukeguna, saiokop, egunak, generoak, pelikulak, gelak, kartelera);
                     // Eguneko kartelera aldatu daiteke, beraz aldatzeko aukera eman, baino soilik
                     // kontraseña ondo jartzen badezu
                     System.out.println(" "+egunak[aukeguna - 1]
@@ -142,23 +124,7 @@ public class Zinemazubieta {
                         while (aukeraeros == 'B'&& sarrerakont<4) {
                             System.out.println("Zein pelikularentzat erosi nahi dituzu sarrerak?");
                             //Egun horretan proiektatuko diren pelikula guztiak imprimatuko dira genereo eta orduekin
-                            // Astean zehar den kontrolatzen du zeren astean zehar ezin dira pelikulak
-                            // proiektatu 15:00 baino lehen
-                            if (aukeguna < 6) {
-                                for (int i = 0; i < astelehena.length; i++) {
-                                    System.out.println((i + 1) + ". " + pelikulak[kartelera[aukeguna - 1][i]]
-                                            + " -------------- " + gelak[generoak[kartelera[aukeguna - 1][i]]]
-                                            + " --------------" + (15 + 2 * i) + ":00 etan.");
-                                }
-                            }
-                            // Asteburua den kontrolatu
-                            else {
-                                for (int i = 0; i < astelehena.length; i++) {
-                                    System.out.println((i + 1) + ". " + pelikulak[kartelera[aukeguna - 1][i]]
-                                            + " --------------" + gelak[generoak[kartelera[aukeguna - 1][i]]]
-                                            + " --------------" + (12 + 2 * i) + ":00 etan.");
-                                }
-                            }
+                            Kartelera(aukeguna, saiokop, egunak, generoak, pelikulak, gelak, kartelera);
                             aukeros=0;
                             //aukeros reiniziatu, bestela ez digu beste pelikula batentzat sarrerak erosten
                             //aukera egokia den edo ez jakiteko
@@ -277,5 +243,28 @@ public class Zinemazubieta {
             auk = 0;
         }
         sc.close();
+    }
+
+
+    static void Kartelera(int aukeguna, int saiokop, String[] egunak, int[] generoak, String[] pelikulak, String[] gelak, int[][] kartelera ){
+         // Aukeratutako egunean dauden pelikulak inprimatuko ditu.
+                    System.out.println(" "+egunak[aukeguna - 1] + " egunean proiektatuko diren pelikulak:");
+                    // Astean zenhar den kontrolatzen du zeren astean zehar ezin dira pelikulak
+                    // proiektatu 15:00 baino lehen
+                    if (aukeguna < 6) {
+                        for (int i = 0; i < saiokop; i++) {
+                            System.out.println((i + 1) + ". " + pelikulak[kartelera[aukeguna - 1][i]]
+                                    + " -------------- " + gelak[generoak[kartelera[aukeguna - 1][i]]]
+                                    + " --------------" + (15 + 2 * i) + ":00 etan.");
+                        }
+                    }
+                    // Asteburua den kontrolatu
+                    else {
+                        for (int i = 0; i < saiokop; i++) {
+                            System.out.println((i + 1) + ". " + pelikulak[kartelera[aukeguna - 1][i]]
+                                    + " --------------" + gelak[generoak[kartelera[aukeguna - 1][i]]]
+                                    + " --------------" + (12 + 2 * i) + ":00 etan.");
+                        }
+                    }
     }
 }
