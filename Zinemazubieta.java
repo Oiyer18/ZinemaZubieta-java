@@ -1,7 +1,17 @@
 import java.util.Scanner;
 
 public class Zinemazubieta {
-    static void main(String[] args) {
+    static void inprimatuKartelera(String[] pelikulak, String[] gelak, int[] generoak,
+            int[][] kartelera, int aukeguna) {
+        for (int i = 0; i < kartelera[aukeguna - 1].length; i++) {
+            int pelikula = kartelera[aukeguna - 1][i];
+            int hasieraOrdua = aukeguna < 6 ? 15 : 12;
+            System.out.println((i + 1) + ". " + pelikulak[pelikula]
+                    + " -------------- " + gelak[generoak[pelikula]]
+                    + " --------------" + (hasieraOrdua + 2 * i) + ":00 etan.");
+        }
+    }
+   public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         // aldagaiak definitu
         // pelikulak[] gure pelikula guztiak gordeko ditu eta pelikula bakooitzeri zenbaki bat emango dio.
@@ -73,21 +83,7 @@ public class Zinemazubieta {
                   
                     // Astean zenhar den kontrolatzen du zeren astean zehar ezin dira pelikulak
                     // proiektatu 15:00 baino lehen
-                    if (aukeguna < 6) {
-                        for (int i = 0; i < astelehena.length; i++) {
-                            System.out.println((i + 1) + ". " + pelikulak[kartelera[aukeguna - 1][i]]
-                                    + " -------------- " + gelak[generoak[kartelera[aukeguna - 1][i]]]
-                                    + " --------------" + (15 + 2 * i) + ":00 etan.");
-                        }
-                    }
-                    // Asteburua den kontrolatu
-                    else {
-                        for (int i = 0; i < astelehena.length; i++) {
-                            System.out.println((i + 1) + ". " + pelikulak[kartelera[aukeguna - 1][i]]
-                                    + " --------------" + gelak[generoak[kartelera[aukeguna - 1][i]]]
-                                    + " --------------" + (12 + 2 * i) + ":00 etan.");
-                        }
-                    }
+                    inprimatuKartelera(pelikulak, gelak, generoak, kartelera, aukeguna);
                     // Eguneko kartelera aldatu daiteke, beraz aldatzeko aukera eman, baino soilik
                     // kontraseña ondo jartzen badezu
                     System.out.println(" "+egunak[aukeguna - 1]
