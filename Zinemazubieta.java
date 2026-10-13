@@ -252,19 +252,43 @@ public class Zinemazubieta {
                     // Astean zenhar den kontrolatzen du zeren astean zehar ezin dira pelikulak
                     // proiektatu 15:00 baino lehen
                     if (aukeguna < 6) {
-                        for (int i = 0; i < saiokop; i++) {
-                            System.out.println((i + 1) + ". " + pelikulak[kartelera[aukeguna - 1][i]]
-                                    + " -------------- " + gelak[generoak[kartelera[aukeguna - 1][i]]]
-                                    + " --------------" + (15 + 2 * i) + ":00 etan.");
+                            for (int i = 0; i < saiokop; i++) {
+                                System.out.print("    "+(i + 1) + ". " + pelikulak[kartelera[aukeguna - 1][i]]+" ");
+                                        for(int l=0;l<35-pelikulak[kartelera[aukeguna - 1][i]].length();l++){
+                                            System.out.print("-");
+                                            if(l==35-pelikulak[kartelera[aukeguna - 1][i]].length()){
+                                                System.out.print(" ");
+                                            }
+                                        } 
+                                        System.out.print(gelak[generoak[kartelera[aukeguna - 1][i]]]);
+                                        for(int l=0;l<25-gelak[generoak[kartelera[aukeguna - 1][i]]].length();l++){
+                                            System.out.print("-");
+                                            if(l==25-gelak[generoak[kartelera[aukeguna - 1][i]]].length()-1){
+                                                System.out.print(" ");
+                                            }
+                                        }
+                                        System.out.print((15 + 2 * i) + ":00 etan. \n");
+                            }
                         }
-                    }
                     // Asteburua den kontrolatu
                     else {
-                        for (int i = 0; i < saiokop; i++) {
-                            System.out.println((i + 1) + ". " + pelikulak[kartelera[aukeguna - 1][i]]
-                                    + " --------------" + gelak[generoak[kartelera[aukeguna - 1][i]]]
-                                    + " --------------" + (12 + 2 * i) + ":00 etan.");
-                        }
+                       for (int i = 0; i < saiokop; i++) {
+                                System.out.print("    "+(i + 1) + ". " + pelikulak[kartelera[aukeguna - 1][i]]+" ");
+                                        for(int l=0;l<35-pelikulak[kartelera[aukeguna - 1][i]].length();l++){
+                                            System.out.print("-");
+                                            if(l==35-pelikulak[kartelera[aukeguna - 1][i]].length()){
+                                                System.out.print(" ");
+                                            }
+                                        } 
+                                        System.out.print(gelak[generoak[kartelera[aukeguna - 1][i]]]);
+                                        for(int l=0;l<25-gelak[generoak[kartelera[aukeguna - 1][i]]].length();l++){
+                                            System.out.print("-");
+                                            if(l==25-gelak[generoak[kartelera[aukeguna - 1][i]]].length()-1){
+                                                System.out.print(" ");
+                                            }
+                                        }
+                                        System.out.print((12 + 2 * i) + ":00 etan. \n");
+                            }
                     }
     }
 }
