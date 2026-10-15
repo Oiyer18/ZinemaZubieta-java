@@ -82,10 +82,8 @@ public class Zinemazubieta {
                                          }
                                          //Behin erabakita zein pelikulagatik aldatu nahi dezun aldatu.
                                           aldataukpelik=sc.nextInt();
-                                         while(aldataukpelik<=0||aldataukpelik>15){
-                                            System.out.println("Sartutako aukera ez da egokia, faborez sartu baliozko aukera bat");
-                                            aldataukpelik=sc.nextInt();
-                                         }
+                                          //konprobatu aukera egokia dela
+                                          Konprobatu(aldataukpelik, 15, sc);
                                         kartelera[aukeguna - 1][aukaldat - 1] = aldataukpelik - 1;
                                          // Kartelera aldatzen jarraitzeko aukera eman
                                          System.out.println("Beste pelikularik aldatu nahi duzu? (B/E)");
@@ -110,12 +108,7 @@ public class Zinemazubieta {
                             aukeros=0;
                             //aukeros reiniziatu, bestela ez digu beste pelikula batentzat sarrerak erosten
                             //aukera egokia den edo ez jakiteko
-                            while (aukeros <= 0 || aukeros > astelehena.length) {
-                                aukeros = sc.nextInt();
-                                if (aukeros <= 0 || aukeros > astelehena.length) {
-                                    System.out.println("Aukera ez da egokia, faborez sartu egokia den aukera bat.");
-                                }
-                            }
+                            Konprobatu(aukeros, astelehena.length, sc);
                             //zenbat sarrera erosi nahi diren galdetu
                             System.out.println("Zenbat sarrera erosi nahi dituzu?");
                             sarrerakop = sc.nextInt();
