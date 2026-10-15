@@ -43,54 +43,36 @@ public class Zinemazubieta {
         // def aldagaia kontrolatuko du menua berriro erakustea funtzio bat egin ondoren
         // def(definitivo)
         while (def == 0) {
-        
-            while ((auk <= 0 || auk > 5)) {
                 // Menu nagusia imprimitu
                 System.out.println(
-                        "-----------MENU NAGUSIA-----------\n 1.Asteko eguna aukeratu\n 2.Zinemaren informazio orokorra\n 3.Kokapena\n 4.Irekiera ordutegia\n 5.Irten\n----------------------------------");
-                auk = sc.nextInt();
+                        "-----------MENU NAGUSIA-----------\n 1.Asteko eguna aukeratu\n 2.Zinemaren informazio orokorra\n 3.Kokapena\n 4.Irekiera ordutegia\n 5.Irten\n----------------------------------\n Zer egin nahi duzu? sartu zenbakia.");
                 //sartutako aukera baliozkoa den edo ez kontrolatu
-                if (auk <= 0 || auk > 6) {
-                    System.out.println("Sartutako aukera ez da existitzen, faborez baliozko bat aukeratu");
-                }
-            }
+                auk=0;
+                auk=Konprobatu(auk, 5, sc);
             switch (auk) {
                 case 1:
                     // Asteko egunen zerrenda imprimatuko du.
-                    System.out.println(
-                            "---------ASTEKO EGUNAK---------\n 1.Astelehena\n 2.Asteartea\n 3.Asteazkena\n 4.Osteguna\n 5.Ostirala\n 6.Larunbata\n 7.Igandea\n---------------------------");
+                    System.out.println( "---------ASTEKO EGUNAK---------\n 1.Astelehena\n 2.Asteartea\n 3.Asteazkena\n 4.Osteguna\n 5.Ostirala\n 6.Larunbata\n 7.Igandea\n---------------------------\n Erabakitzeko sartu zenbakia.");
                     aukeguna = 0;
-                    while (aukeguna <= 0 || aukeguna > 7) {
-                        aukeguna = sc.nextInt();
-                        // konprobatu eguna baliozkoa dela
-                        if (aukeguna <= 0 || aukeguna > 7) {
-                            System.out
-                                    .println("Sartutako aukera ez dago ondo, faborez sartu baliozkoa den aukera bat.");
-                        }
-                    }
+                    aukeguna=Konprobatu(aukeguna, 6,sc);
                     // Aukeratutako egunean dauden pelikulak inprimatuko ditu.
                     Kartelera(aukeguna, saiokop, egunak, generoak, pelikulak, gelak, kartelera);
                     // Eguneko kartelera aldatu daiteke, beraz aldatzeko aukera eman, baino soilik
                     // kontraseña ondo jartzen badezu
                     System.out.println(" "+egunak[aukeguna - 1]
-                            + " eguneko kartelera aldatu nahi badezu zineman egin behar dezu lan, kartelera aldatu nahi dezu? (B/E)");
+                            + " eguneko kartelera aldatu nahi badezu zineman egin behar dezu lan, kartelera aldatu nahi dezu? (B/E)");        
                             if(sc.next().charAt(0)=='B'){
                                     System.out.println("Jakiteko hemen lana egiten duzun edo ez kontraseina sartu (1-9 zenbaki bat)");
                                     if (sc.nextInt() == 8) {
+                                        // Kartelera aldatzeko aukera eman soilik aldat!=E (Ez) bada                                        
                                         aldat = 'B';
-                                        // Kartelera aldatzeko aukera eman soilik aldat!=E (Ez) bada
                                         while (aldat != 'E') {
                                         //aukaldat aldagaian gordeko da aldatu nahi dezun pelikularen zenbakia
                                         //aukaldat reiniziatu pelikula bat baino gehiago aldatu ditzazkezulako
-                                         aukaldat = 0;
+                                        aukaldat = 0;
                                         System.out.println("Zein pelikula aldatu nahi duzu?");
                                         // Baliozko aukera bat sartu den edo ez kontrolatu
-                                        while (aukaldat <= 0 || aukaldat > astelehena.length) {
-                                            aukaldat = sc.nextInt();
-                                            if (aukaldat <= 0 || aukaldat > astelehena.length) {
-                                            System.out.println("Aukera ez da egokia, faborez sartu egokia den aukera bat.");
-                                            }
-                                        }
+                                        aukaldat= Konprobatu(aukaldat, astelehena.length,sc);
                                          System.out.println(pelikulak[kartelera[aukeguna - 1][aukaldat - 1]]//[aukaldat-1] zergatik? 0-4 delako!!
                                         + " pelikula aldatu nahi duzu, zer pelikulagatik aldatu nahi duzu? hauek dira pelikula guztiak:");
                                         //zineman dauden pelikula guztiak imprimatu jakiteko zein pelikulagatik aldatu.
@@ -267,28 +249,27 @@ public class Zinemazubieta {
                                                 System.out.print(" ");
                                             }
                                         }
+                                        //kontrolatu ea astebukaera den edo ez
+                                        if(aukeguna<6){
                                         System.out.print((15 + 2 * i) + ":00 etan. \n");
+                                        }
+                                        else{
+                                            System.out.print((12 + 2 * i) + ":00 etan. \n");
+                                        }
                             }
                         }
-                    // Asteburua den kontrolatu
-                    else {
-                       for (int i = 0; i < saiokop; i++) {
-                                System.out.print("    "+(i + 1) + ". " + pelikulak[kartelera[aukeguna - 1][i]]+" ");
-                                        for(int l=0;l<35-pelikulak[kartelera[aukeguna - 1][i]].length();l++){
-                                            System.out.print("-");
-                                            if(l==35-pelikulak[kartelera[aukeguna - 1][i]].length()){
-                                                System.out.print(" ");
-                                            }
-                                        } 
-                                        System.out.print(gelak[generoak[kartelera[aukeguna - 1][i]]]);
-                                        for(int l=0;l<25-gelak[generoak[kartelera[aukeguna - 1][i]]].length();l++){
-                                            System.out.print("-");
-                                            if(l==25-gelak[generoak[kartelera[aukeguna - 1][i]]].length()-1){
-                                                System.out.print(" ");
-                                            }
-                                        }
-                                        System.out.print((12 + 2 * i) + ":00 etan. \n");
-                            }
-                    }
+    }
+    static int Konprobatu(int aukera, int luzeera, Scanner sc){
+     
+        while (aukera <= 0|| aukera > luzeera) {
+            aukera = sc.nextInt();
+            // konprobatu eguna baliozkoa dela
+            if (aukera <= 0 || aukera > luzeera) {
+                System.out.println("Sartutako aukera ez dago ondo, faborez sartu baliozkoa den aukera bat.");
+            }
+         }
+
+         
+        return aukera;
     }
 }
