@@ -223,10 +223,9 @@ public class Zinemazubieta {
 
     static void Kartelera(int aukeguna, int saiokop, String[] egunak, int[] generoak, String[] pelikulak, String[] gelak, int[][] kartelera ){
          // Aukeratutako egunean dauden pelikulak inprimatuko ditu.
-                    System.out.println(" "+egunak[aukeguna - 1] + " egunean proiektatuko diren pelikulak:");
-                    // Astean zenhar den kontrolatzen du zeren astean zehar ezin dira pelikulak
-                    // proiektatu 15:00 baino lehen
-                    if (aukeguna < 6) {
+                System.out.println(" "+egunak[aukeguna - 1] + " egunean proiektatuko diren pelikulak:");
+                            /*  Astean zenhar den kontrolatzen du zeren astean zehar ezin dira pelikulak
+                                proiektatu 15:00 baino lehen */
                             for (int i = 0; i < saiokop; i++) {
                                 System.out.print("    "+(i + 1) + ". " + pelikulak[kartelera[aukeguna - 1][i]]+" ");
                                         for(int l=0;l<35-pelikulak[kartelera[aukeguna - 1][i]].length();l++){
@@ -249,7 +248,7 @@ public class Zinemazubieta {
                                         else{
                                             System.out.print((12 + 2 * i) + ":00 etan. \n");
                                         }
-                            }
+                            
                         }
     }
     static int Konprobatu(int aukera, int luzeera, Scanner sc){
