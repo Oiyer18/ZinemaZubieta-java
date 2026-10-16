@@ -106,25 +106,25 @@ public class Zinemazubieta {
                             //Egun horretan proiektatuko diren pelikula guztiak imprimatuko dira genereo eta orduekin
                             Kartelera(aukeguna, saiokop, egunak, generoak, pelikulak, gelak, kartelera);
                             aukeros=0;
-                            //aukeros reiniziatu, bestela ez digu beste pelikula batentzat sarrerak erosten
-                            //aukera egokia den edo ez jakiteko
+                            /*aukeros reiniziatu, bestela ez digu beste pelikula batentzat sarrerak erosten
+                            aukera egokia den edo ez jakiteko*/
                             Konprobatu(aukeros, astelehena.length, sc);
                             //zenbat sarrera erosi nahi diren galdetu
                             System.out.println("Zenbat sarrera erosi nahi dituzu?");
                             sarrerakop = sc.nextInt();
-                            //sarrerakop aldagaian gorde zenbat erosi nahi diren eta kartelera matrizearen dimentsio berdineko
-                            // sarrerak matrizean lehen aukeratutako pelikularen "kasillan" sarrerakop gorde
-                             //Erosi daitezken sarrera kopurua edo gehiago erosi badituzu 
-                             // pasa zean pelikularen sarrera kopurua murriztuko da 4 izan dadin erositako sarrera kopuru totala
-                             // Sarrera gehiago erosi ditzazkezu beraz aukera ematen dizu.
+                            /*sarrerakop aldagaian gorde zenbat erosi nahi diren eta kartelera matrizearen dimentsio berdineko
+                              sarrerak matrizean lehen aukeratutako pelikularen "kasillan" sarrerakop gorde
+                              Erosi daitezken sarrera kopurua edo gehiago erosi badituzu 
+                              pasa zean pelikularen sarrera kopurua murriztuko da 4 izan dadin erositako sarrera kopuru totala
+                              Sarrera gehiago erosi ditzazkezu beraz aukera ematen dizu. */
                             if(sarrerakont+sarrerakop>=4){
                                 if(sarrerakont+sarrerakop==4){
                                     System.out.println("4 sarrera erosi dituzu guztira");
-                                    if (sarrerak[aukeguna-1][aukeros-1]!=0){
-                                     sarrerak[aukeguna-1][aukeros-1] = sarrerak[aukeguna-1][aukeros-1] + sarrerakop;
+                                    if (sarrerak[aukeguna-1][aukeros]!=0){
+                                     sarrerak[aukeguna-1][aukeros] = sarrerak[aukeguna-1][aukeros] + sarrerakop;
                                     }
                                     else{
-                                    sarrerak[aukeguna-1][aukeros-1]=sarrerakop;
+                                    sarrerak[aukeguna-1][aukeros]=sarrerakop;
                                     }
                                     sarrerakont=sarrerakont+sarrerakop;
                                     
@@ -133,15 +133,15 @@ public class Zinemazubieta {
                                     System.out.println("Erositako sarrera kopurua 4 baino gehiago da, beraz azkeneko pelikularen sarrerak murriztu zaizkizu.");
                                     //2 aldiz segidan erosten badituzu sarrerak egun berdinarentzat pelikula berdinarentzat
                                     //detektatuko du eta lehen zeudenak berrietara gehituko ditu 
-                                    if (sarrerak[aukeguna-1][aukeros-1]!=0){
-                                         sarrerak[aukeguna-1][aukeros-1] = sarrerak[aukeguna-1][aukeros-1] + sarrerakop;
-                                          if( sarrerak[aukeguna-1][aukeros-1] + sarrerakop>=4){
-                                            sarrerak[aukeguna-1][aukeros-1] = 4;
+                                    if (sarrerak[aukeguna-1][aukeros]!=0){
+                                         sarrerak[aukeguna-1][aukeros] = sarrerak[aukeguna-1][aukeros] + sarrerakop;
+                                          if( sarrerak[aukeguna-1][aukeros] + sarrerakop>=4){
+                                            sarrerak[aukeguna-1][aukeros] = 4;
                                             }
                                     }
                                     //ez dira lehenagotikan sarrerak erosi
                                     else{
-                                    sarrerak[aukeguna-1][aukeros-1]=4-sarrerakont;
+                                    sarrerak[aukeguna-1][aukeros]=4-sarrerakont;
                                     }
                                     sarrerakont=4;
                                 }
@@ -151,12 +151,12 @@ public class Zinemazubieta {
                             if (sarrerakont+sarrerakop < 4) {
                                 //2 aldiz segidan erosten badituzu sarrerak egun berdinarentzat pelikula berdinarentzat
                                 //detektatuko du eta lehen zeudenak berrietara gehituko ditu
-                                   if (sarrerak[aukeguna-1][aukeros-1]!=0){
-                                     sarrerak[aukeguna-1][aukeros-1] = sarrerak[aukeguna-1][aukeros-1] + sarrerakop;
+                                   if (sarrerak[aukeguna-1][aukeros]!=0){
+                                     sarrerak[aukeguna-1][aukeros] = sarrerak[aukeguna-1][aukeros] + sarrerakop;
                                     }
                                 //lehen ez zeuden sarrerak erosita
                                     else{
-                                    sarrerak[aukeguna-1][aukeros-1] = sarrerakop;
+                                    sarrerak[aukeguna-1][aukeros] = sarrerakop;
                                     }
                                 //gehiago erosi nahi duzun edo ez galdetu
                                     sarrerakont = sarrerakont + sarrerakop;
@@ -249,10 +249,9 @@ public class Zinemazubieta {
                                             System.out.print((12 + 2 * i) + ":00 etan. \n");
                                         }
                             
-                        }
+                           }
     }
     static int Konprobatu(int aukera, int luzeera, Scanner sc){
-     
         while (aukera <= 0|| aukera > luzeera) {
             aukera = sc.nextInt();
             // konprobatu eguna baliozkoa dela
