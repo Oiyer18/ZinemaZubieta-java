@@ -56,15 +56,20 @@ public class Zinemazubieta {
         kartelera[6] = igandea;
         int auk = 0, def = 0, aukeguna = 0, aukaldat = 0, sarrerakont = 0, sarrerakop = 0,
          aukeros = 0,aldataukpelik=0, saiokop=astelehena.length;
-        // asteko egun bakoitzari 5 pelikula random esleitzen dizkio
-        for (int i = 0; i < astelehena.length; i++) {
-            astelehena[i] = (int) (Math.random() * 15);
-            asteartea[i] = (int) (Math.random() * 15);
-            asteazkena[i] = (int) (Math.random() * 15);
-            osteguna[i] = (int) (Math.random() * 15);
-            ostirala[i] = (int) (Math.random() * 15);
-            larunbata[i] = (int) (Math.random() * 15);
-            igandea[i] = (int) (Math.random() * 15);
+       
+        for (int egun = 0; egun < kartelera.length; egun++) {
+            ArrayList<Integer> aretoakErabilita = new ArrayList<>();
+            for (int saio = 0; saio < saiokop; saio++) {
+                int pelikula;
+                int aretoa;
+                do {
+                    pelikula = (int) (Math.random() * pelikulak.length);
+                    aretoa = generoak[pelikula];
+                } while (aretoakErabilita.contains(aretoa));
+
+                kartelera[egun][saio] = pelikula;
+                aretoakErabilita.add(aretoa);
+            }
         }
         System.out.println("Ongi etorri ZinemaZubietara!!");
         // def aldagaia kontrolatuko du menua berriro erakustea funtzio bat egin ondoren
