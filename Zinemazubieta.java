@@ -6,7 +6,8 @@ public class Zinemazubieta {
         ArrayList<String> pelikulakList = new ArrayList<>();
         ArrayList<String> generoakList = new ArrayList<>();
         ArrayList<String> aretoakList = new ArrayList<>();
-       
+        ArrayList<String> egunakList = new ArrayList<>();
+
         // aldagaiak definitu
         // pelikulak[] gure pelikula guztiak gordeko ditu eta pelikula bakooitzeri zenbaki bat emango dio.
         // gelak[] dazkagun gela guztiak gorde eta zenbaki bat esleituko die
@@ -34,8 +35,11 @@ public class Zinemazubieta {
                         }
                         }
                     }
-                 for(int p =0; p<gelak.length; p++){
-                    aretoakList.add(gelak[p]);
+                 for(int i =0; i<gelak.length; i++){
+                    aretoakList.add(gelak[i]);
+                      }
+                for(int i =0; i<egunak.length; i++){
+                egunakList.add(egunak[i]);
                       }
 
         
