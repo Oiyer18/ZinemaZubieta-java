@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Zinemazubieta {
     static void inprimatuKartelera(String[] pelikulak, String[] gelak, int[] generoak,
@@ -22,10 +23,40 @@ public class Zinemazubieta {
                 "Wolfgang (Extraordinario)", "El casoplón", "Un funeral de locos", "Sirāt" },
                 gelak = { "Umeen gela", "Superheroien gela", "thriller gela", "Zientzia fikzio gela", "komedia gela" },
                 egunak = { "Astelehena", "Asteartea", "Asteazkena", "Osteguna", "Ostirala", "Larunbata", "Igandea" };
+
+        ArrayList<String> pelikulakList =  new ArrayList<>();
+        ArrayList<String> generoakList = new ArrayList<>();
+
          // asteko egun bakoitzarentzat array bat sortu han eguneko pelikulak gordeko ditugulako
         int[] astelehena = new int[5], asteartea = new int[5], asteazkena = new int[5], osteguna = new int[5],
                 ostirala = new int[5], larunbata = new int[5], igandea = new int[5],
                 generoak = { 0, 0, 0, 0, 1, 2, 3, 2, 0, 0, 4, 2, 2, 4, 2 };
+    
+        
+        
+        for  (int i = 0; i<pelikulak.length; i++){
+            pelikulakList.add(pelikulak[i]);
+            for (int j = 0; j<generoak.length; j++){
+                if (generoak[j]== 0) {
+                    generoakList.add(" (haurrentzako) ");
+                }else if (generoak [j]==1) {
+                    generoakList.add(" (superheroiak) ");
+                } else if (generoak [j] == 2){
+                    generoakList.add(" (thriller) ");
+                }else if (generoak [j] == 3){
+                    generoakList.add(" (zientzia fikzioa) ");
+                }else if (generoak [j] == 4) {
+                    generoakList.add(" (komedia) ");
+                }
+            }
+
+           
+        }
+
+        for (int i = 0; i<pelikulakList.size(); i++){
+            System.out.print((i+1) + ". " + pelikulakList.get(i) + "");
+            System.out.println(""+ generoakList.get(i));
+        }
         // Kartelera matrizea sortu det eta posizio bakoitzan asteko egun bakoitzaren
         //  array-a, hau da egun horretan egongo diren pelikulak gordetzen dira
         int[][] kartelera = new int[7][5],sarrerak = new int[7][5];
