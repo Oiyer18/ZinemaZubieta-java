@@ -1,7 +1,9 @@
-import java.util.Scanner;
+    import java.util.Scanner;
 
 public class Zinemazubieta {
-    static void main(String[] args) {
+    
+    public static void main(String[] args) {
+
         Scanner sc = new Scanner(System.in);
         // aldagaiak definitu
         // pelikulak[] gure pelikula guztiak gordeko ditu eta pelikula bakooitzeri zenbaki bat emango dio.
@@ -73,8 +75,9 @@ public class Zinemazubieta {
                   
                     // Astean zenhar den kontrolatzen du zeren astean zehar ezin dira pelikulak
                     // proiektatu 15:00 baino lehen
-                    if (aukeguna < 6) {
-                        for (int i = 0; i < astelehena.length; i++) {
+                    if (aukeguna < 6) { 
+                        for (int i = 0; i < astelehena.length; i++) {    
+                                          
                             System.out.println((i + 1) + ". " + pelikulak[kartelera[aukeguna - 1][i]]
                                     + " -------------- " + gelak[generoak[kartelera[aukeguna - 1][i]]]
                                     + " --------------" + (15 + 2 * i) + ":00 etan.");
