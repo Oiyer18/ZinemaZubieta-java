@@ -1,8 +1,12 @@
+import java.util.ArrayList;
 import java.util.Scanner;
-
 public class Zinemazubieta {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        ArrayList<String> pelikulakList = new ArrayList<>();
+        ArrayList<String> generoakList = new ArrayList<>();
+        ArrayList<String> aretoakList = new ArrayList<>();
+       
         // aldagaiak definitu
         // pelikulak[] gure pelikula guztiak gordeko ditu eta pelikula bakooitzeri zenbaki bat emango dio.
         // gelak[] dazkagun gela guztiak gorde eta zenbaki bat esleituko die
@@ -16,6 +20,25 @@ public class Zinemazubieta {
         int[] astelehena = new int[5], asteartea = new int[5], asteazkena = new int[5], osteguna = new int[5],
                 ostirala = new int[5], larunbata = new int[5], igandea = new int[5],
                 generoak = { 0, 0, 0, 0, 1, 2, 3, 2, 0, 0, 4, 2, 2, 4, 2 };
+                 for(int i =0; i< pelikulak.length; i++){
+                    pelikulakList.add(pelikulak[i]);
+                    for(int j = 0; j<generoak.length; j++){
+                        switch (generoak [ j ]) {
+                            case 0 -> generoakList.add("  (haurrentzako)  ");
+                            case 1 -> generoakList.add("  (superheroiak)  ");
+                            case 2 -> generoakList.add("  (thriller)  ");
+                            case 3 -> generoakList.add("  (zientzia fikzioa)  ");
+                            case 4 -> generoakList.add("  (komedia)   ");
+                            default -> {
+                            }
+                        }
+                        }
+                    }
+                 for(int p =0; p<gelak.length; p++){
+                    aretoakList.add(gelak[p]);
+                      }
+
+        
         // Kartelera matrizea sortu det eta posizio bakoitzan asteko egun bakoitzaren
         //  array-a, hau da egun horretan egongo diren pelikulak gordetzen dira
         int[][] kartelera = new int[7][5],sarrerak = new int[7][5];
