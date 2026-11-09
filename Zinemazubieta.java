@@ -68,7 +68,7 @@ public class Zinemazubieta {
         while (def == 0) {
                 // Menu nagusia imprimitu
                 System.out.println(
-                        "-----------MENU NAGUSIA-----------\n 1.Asteko eguna aukeratu\n 2.Zinemaren informazio orokorra\n 3.Kokapena\n 4.Irekiera ordutegia\n 5.Irten\n----------------------------------\n Zer egin nahi duzu? sartu zenbakia.");
+                        "-----------MENU NAGUSIA-----------\n 1.Asteko eguna aukeratu\n 2.Zinemaren informazio orokorra\n 3.Kokapena\n 4.Irekiera ordutegia\n 5.Administrazioa\n 6.Irten\n----------------------------------\n Zer egin nahi duzu? sartu zenbakia.");
                 //sartutako aukera baliozkoa den edo ez kontrolatu
                 auk=0;
                 auk=Konprobatu(auk, 5, sc);
@@ -218,7 +218,49 @@ public class Zinemazubieta {
                     // Ordutegia imprimatzeko funtzioa.
                     System.out.println(" ASTEAN ZEHAR: 15:00 - 00:00\n ASTEBURUAK 12:00 - 00:00");
                     break;
-                    case 5:
+                case 5:
+                    int auk2= 0;
+                    do{
+
+                    System.out.println("");
+                    System.out.println("-----------ADMINISTRAZIO ATALA-----------");
+                    System.out.println("1.Pelikula berria gehitu");
+                    System.out.println("2. Pelikula baten informazioa aldatu");
+                    System.out.println("3. Pelikula bat zerrendatik ezabatu");
+                    System.out.println("4. Pelikulen zerrenda erakutsi");
+                    System.out.println("5. Irten");  
+                    System.out.println("-----------------------------------------");
+                    System.out.println("");
+                    System.out.println("Aukeratu zenbaki bat (1-5)");
+                    auk2 = sc.nextInt();
+                    
+                    switch (auk2) {
+                        case 1:
+                            System.out.println("sartu pelikula berriaren izena: ");
+                            String peliberri = sc.nextLine();
+                            pelikulakList.add(peliberri);
+                            System.out.println("Sartu pelikula horren generoa (1-5): ");
+                            for (int i = 0; i<generoakList.size(); i++){
+                                System.out.println((i+1) + ". " + generoakList.get(i));
+                            }
+
+                            int generoberri = Integer.parseInt(sc.nextLine());
+                        
+                            break;
+                        case 4:
+                            for (int i = 0; i<pelikulakList.size();i++){
+                                System.out.print((i+1)+ ". " + pelikulakList.get(i));
+                                System.out.println("" + generoakList.get(i));
+                            }
+                        break;
+                    
+                        default:
+                            break;
+                    }
+                    } while (auk2!=5);
+
+                
+                    case 6:
                         // Programa amaitzeko aukera.
                         // Erosi dituzun sarreren tiketa
                         if (sarrerakont != 0) {
