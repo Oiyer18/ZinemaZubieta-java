@@ -1,39 +1,56 @@
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Zinemazubieta {
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         ArrayList<String> pelikulakList = new ArrayList<>();
         ArrayList<String> generoakList = new ArrayList<>();
         ArrayList<String> aretoakList = new ArrayList<>();
         ArrayList<String> egunakList = new ArrayList<>();
+        ArrayList<String> erabiltzaileak = new ArrayList<>();
+        ArrayList<String> pasahitzak = new ArrayList<>();
+
+        erabiltzaileak.add("Oier");
+        erabiltzaileak.add("Jon");
+        erabiltzaileak.add("Kay");
+
+        pasahitzak.add("1881");
+        pasahitzak.add("0308");
+        pasahitzak.add("3367");
 
         // aldagaiak definitu
         // pelikulak[] gure pelikula guztiak gordeko ditu eta pelikula bakooitzeri
         // zenbaki bat emango dio.
         // gelak[] dazkagun gela guztiak gorde eta zenbaki bat esleituko die
-        String[] pelikulak = { "Lilo y Stitch", "Una película de Minecraft", "Mufasa: El rey león",
-                "Cómo entrenar a tu dragón", "Capitán América: Brave New World", "Cónclave", "Sonic 3: La película",
-                "Misión: Imposible. Sentencia Final", "Blancanieves", "Thunderbolt", "Padre no hay más que uno 5",
-                "Wolfgang (Extraordinario)", "El casoplón", "Un funeral de locos", "Sirāt" },
-                gelak = { "Umeen gela", "Superheroien gela", "thriller gela", "Zientzia fikzio gela", "komedia gela" },
-                egunak = { "Astelehena", "Asteartea", "Asteazkena", "Osteguna", "Ostirala", "Larunbata", "Igandea" };
+        String[] pelikulak = {"Lilo y Stitch", "Una película de Minecraft", "Mufasa: El rey león",
+            "Cómo entrenar a tu dragón", "Capitán América: Brave New World", "Cónclave", "Sonic 3: La película",
+            "Misión: Imposible. Sentencia Final", "Blancanieves", "Thunderbolt", "Padre no hay más que uno 5",
+            "Wolfgang (Extraordinario)", "El casoplón", "Un funeral de locos", "Sirāt"},
+                gelak = {"Umeen gela", "Superheroien gela", "thriller gela", "Zientzia fikzio gela", "komedia gela"},
+                egunak = {"Astelehena", "Asteartea", "Asteazkena", "Osteguna", "Ostirala", "Larunbata", "Igandea"};
         // asteko egun bakoitzarentzat array bat sortu han eguneko pelikulak gordeko
         // ditugulako
         int[] astelehena = new int[5], asteartea = new int[5], asteazkena = new int[5], osteguna = new int[5],
                 ostirala = new int[5], larunbata = new int[5], igandea = new int[5],
-                generoak = { 0, 0, 0, 0, 1, 2, 3, 2, 0, 1, 4, 2, 2, 4, 2 };
+                generoak = {0, 0, 0, 0, 1, 2, 3, 2, 0, 1, 4, 2, 2, 4, 2};
 
         for (int i = 0; i < pelikulak.length; i++) {
             pelikulakList.add(pelikulak[i]);
 
             switch (generoak[i]) {
-                case 0 -> generoakList.add(" haurrentzako");
-                case 1 -> generoakList.add(" superheroiak");
-                case 2 -> generoakList.add(" thriller");
-                case 3 -> generoakList.add(" zientzia fikzioa");
-                case 4 -> generoakList.add(" komedia");
+                case 0 ->
+                    generoakList.add(" haurrentzako");
+                case 1 ->
+                    generoakList.add(" superheroiak");
+                case 2 ->
+                    generoakList.add(" thriller");
+                case 3 ->
+                    generoakList.add(" zientzia fikzioa");
+                case 4 ->
+                    generoakList.add(" komedia");
             }
         }
         for (int p = 0; p < gelak.length; p++) {
@@ -105,8 +122,8 @@ public class Zinemazubieta {
                                 // Baliozko aukera bat sartu den edo ez kontrolatu
                                 aukaldat = Konprobatu(aukaldat, astelehena.length, sc);
                                 System.out.println(pelikulak[kartelera[aukeguna - 1][aukaldat - 1]]// [aukaldat-1]
-                                                                                                   // zergatik? 0-4
-                                                                                                   // delako!!
+                                        // zergatik? 0-4
+                                        // delako!!
                                         + " pelikula aldatu nahi duzu, zer pelikulagatik aldatu nahi duzu? hauek dira pelikula guztiak:");
                                 // zineman dauden pelikula guztiak imprimatu jakiteko zein pelikulagatik aldatu.
                                 System.out.println("------------PELIKULAK------------");
@@ -123,8 +140,7 @@ public class Zinemazubieta {
                                 // Aldatzen jarraitzeko (E) ez den edozein gauza jarri, B (Bai) aukera eman
                                 aldat = sc.next().charAt(0);
                             }
-                        }
-                        // Ez daki kontraseña beraz ez du hemen lana egiten
+                        } // Ez daki kontraseña beraz ez du hemen lana egiten
                         else {
                             System.out.println("Ez duzu hemen lan egiten beraz ezin duzu kartelera aldatu");
                         }
@@ -178,8 +194,7 @@ public class Zinemazubieta {
                                     if (sarrerak[aukeguna - 1][aukeros] + sarrerakop >= 4) {
                                         sarrerak[aukeguna - 1][aukeros] = 4;
                                     }
-                                }
-                                // ez dira lehenagotikan sarrerak erosi
+                                } // ez dira lehenagotikan sarrerak erosi
                                 else {
                                     sarrerak[aukeguna - 1][aukeros] = 4 - sarrerakont;
                                 }
@@ -194,8 +209,7 @@ public class Zinemazubieta {
                             // detektatuko du eta lehen zeudenak berrietara gehituko ditu
                             if (sarrerak[aukeguna - 1][aukeros] != 0) {
                                 sarrerak[aukeguna - 1][aukeros] = sarrerak[aukeguna - 1][aukeros] + sarrerakop;
-                            }
-                            // lehen ez zeuden sarrerak erosita
+                            } // lehen ez zeuden sarrerak erosita
                             else {
                                 sarrerak[aukeguna - 1][aukeros] = sarrerakop;
                             }
@@ -203,7 +217,7 @@ public class Zinemazubieta {
                             sarrerakont = sarrerakont + sarrerakop;
                             System.out.println(
                                     "Beste pelikula batentzat sarrerak erosi nahi dituzu? (B/E) gogoratu 4 direla maximoa eta zuk "
-                                            + sarrerakont + " dituzula jada");
+                                    + sarrerakont + " dituzula jada");
                             aukeraeros = sc.next().charAt(0);
                             if (aukeraeros == 'E') {
                                 System.out.println("Eskerrikasko ZinemaZubietan erosteagatik");
@@ -237,91 +251,112 @@ public class Zinemazubieta {
                     System.out.println(" ASTEAN ZEHAR: 15:00 - 00:00\n ASTEBURUAK 12:00 - 00:00");
                     break;
                 case 5:
-                    int auk5 = 0;
-                    while (auk5 == 0) {
 
-                        System.out.println("");
-                        System.out.println("-----------ADMINISTRAZIO ATALA-----------");
-                        System.out.println("1.Pelikula berria gehitu");
-                        System.out.println("2. Pelikula baten informazioa aldatu");
-                        System.out.println("3. Pelikula bat zerrendatik ezabatu");
-                        System.out.println("4. Pelikulen zerrenda erakutsi");
-                        System.out.println("5. Irten");
-                        System.out.println("-----------------------------------------");
-                        System.out.println("");
-                        System.out.println("Aukeratu zenbaki bat (1-5)");
-                        int auk2 = sc.nextInt();
+                    System.out.println("Sartu erabiltzailea");
+                    String erabiltzailea = sc.next();
+                    if (erabiltzaileak.contains(erabiltzailea) == true) {
+                        System.out.println("erabiltzailea ondo jarri duzu");
+                        System.out.println("Sartu pasahitza");
+                        String pasahitza = sc.next();
+                        
+                        if (pasahitzak.contains(pasahitza) & (erabiltzaileak.indexOf(erabiltzailea)) == (pasahitzak.indexOf(pasahitza)) == true) {
+                            System.out.println("Pasahitza ondo jarri duzu");
 
-                        switch (auk2) {
-                            case 1:
-                                System.out.println("sartu pelikula berriaren izena: ");
-                                sc.nextLine();
-                                String peliberri = sc.nextLine();
-                                pelikulakList.add(peliberri);
-                                System.out.println("Sartu pelikularen generoa:");
-                                String generoBerri = sc.nextLine();
-                                generoakList.add(" (" + generoBerri + ")");
+                        
+                        
 
-                                break;
-                            case 2:
-                                for (int i = 0; i < pelikulakList.size(); i++) {
-                                    System.out.print((i + 1) + ". " + pelikulakList.get(i));
-                                    System.out.println("" + " (" + generoakList.get(i) + " )");
-                                }
-                                System.out.println("zein pelikularen informazioa aldatu nahi dezu (1-"
-                                        + pelikulakList.size() + ")?");
-                                System.out.println("");
-                                auk2 = sc.nextInt();
-                                System.out.println("");
-                                System.out.println("zein datu aldatu nahi duzu?");
-                                System.out.println("1. Pelikularen izena   2.pelikularen generoa");
-                                int auk3 = sc.nextInt();
-                                if (auk3 == 1) {
-                                    System.out.println("sartu pelikularen izen berria:");
+                            int auk5 = 0;
+                            while (auk5 == 0) {
+                            System.out.println("");
+                            System.out.println("-----------ADMINISTRAZIO ATALA-----------");
+                            System.out.println("1. Pelikula berria gehitu");
+                            System.out.println("2. Pelikula baten informazioa aldatu");
+                            System.out.println("3. Pelikula bat zerrendatik ezabatu");
+                            System.out.println("4. Pelikulen zerrenda erakutsi");
+                            System.out.println("5. Irten");
+                            System.out.println("-----------------------------------------");
+                            System.out.println("");
+                            System.out.println("Aukeratu zenbaki bat (1-5)");
+                            int auk2 = sc.nextInt();
+
+                            switch (auk2) {
+                                case 1:
+                                    System.out.println("sartu pelikula berriaren izena: ");
                                     sc.nextLine();
-                                    String izenberri = sc.nextLine();
+                                    String peliberri = sc.nextLine();
+                                    pelikulakList.add(peliberri);
+                                    System.out.println("Sartu pelikularen generoa:");
+                                    String generoBerri = sc.nextLine();
+                                    generoakList.add(" (" + generoBerri + ")");
 
-                                    pelikulakList.set(auk2 - 1, izenberri);
-                                } else if (auk3 == 2) {
-                                    System.out.println("sartu pelikularen genero berria: ");
-                                    sc.nextLine();
-                                    String generoberri = sc.nextLine();
+                                    break;
+                                case 2:
+                                    for (int i = 0; i < pelikulakList.size(); i++) {
+                                        System.out.print((i + 1) + ". " + pelikulakList.get(i));
+                                        System.out.println("" + " (" + generoakList.get(i) + " )");
+                                    }
+                                    System.out.println("zein pelikularen informazioa aldatu nahi dezu (1-"
+                                            + pelikulakList.size() + ")?");
+                                    System.out.println("");
+                                    auk2 = sc.nextInt();
+                                    System.out.println("");
+                                    System.out.println("zein datu aldatu nahi duzu?");
+                                    System.out.println("1. Pelikularen izena   2.pelikularen generoa");
+                                    int auk3 = sc.nextInt();
+                                    if (auk3 == 1) {
+                                        System.out.println("sartu pelikularen izen berria:");
+                                        sc.nextLine();
+                                        String izenberri = sc.nextLine();
 
-                                    generoakList.set(auk2 - 1, generoberri);
-                                } else {
-                                    System.out.println("indize hori ez da esistitzen");
-                                }
-                                break;
-                            case 3:
-                                for (int i = 0; i < pelikulakList.size(); i++) {
-                                    System.out.print((i + 1) + ". " + pelikulakList.get(i));
-                                    System.out.println("" + " (" + generoakList.get(i) + " )");
-                                }
-                                System.out.println("zein pelikula ezabatu nahi dezu (1-" + pelikulakList.size() + ")?");
-                                int auk4 = sc.nextInt();
+                                        pelikulakList.set(auk2 - 1, izenberri);
+                                    } else if (auk3 == 2) {
+                                        System.out.println("sartu pelikularen genero berria: ");
+                                        sc.nextLine();
+                                        String generoberri = sc.nextLine();
 
-                                if (auk4 <= 0 || auk4 > pelikulakList.size()) {
-                                    System.out.println("indize hori ez da esistitzen");
-                                } else {
-                                    pelikulakList.remove(auk4 - 1);
-                                    generoakList.remove(auk4 - 1);
-                                }
+                                        generoakList.set(auk2 - 1, generoberri);
+                                    } else {
+                                        System.out.println("indize hori ez da esistitzen");
+                                    }
+                                    break;
+                                case 3:
+                                    for (int i = 0; i < pelikulakList.size(); i++) {
+                                        System.out.print((i + 1) + ". " + pelikulakList.get(i));
+                                        System.out.println("" + " (" + generoakList.get(i) + " )");
+                                    }
+                                    System.out.println("zein pelikula ezabatu nahi dezu (1-" + pelikulakList.size() + ")?");
+                                    int auk4 = sc.nextInt();
 
-                                break;
-                            case 4:
-                                for (int i = 0; i < pelikulakList.size(); i++) {
-                                    System.out.print((i + 1) + ". " + pelikulakList.get(i));
-                                    System.out.println("" + " (" + generoakList.get(i) + " )");
-                                }
-                                break;
-                            case 5:
-                                auk5 = -1;
-                                break;
+                                    if (auk4 <= 0 || auk4 > pelikulakList.size()) {
+                                        System.out.println("indize hori ez da esistitzen");
+                                    } else {
+                                        pelikulakList.remove(auk4 - 1);
+                                        generoakList.remove(auk4 - 1);
+                                    }
 
+                                    break;
+                                case 4:
+                                    for (int i = 0; i < pelikulakList.size(); i++) {
+                                        System.out.print((i + 1) + ". " + pelikulakList.get(i));
+                                        System.out.println("" + " (" + generoakList.get(i) + " )");
+                                    }
+                                    break;
+                                case 5:
+                                    auk5 = -1;
+                                    break;
+
+                            }
                         }
-                    }
-                    break;
 
+
+                    } else {
+                        System.out.println("pasahitza gaizki jarri duzu melon");
+                    }
+                    } else {
+                        System.out.println("Erabiltzailea gaizki jarri duzu");
+                    }
+
+                    break;
                 case 6:
                     // Programa amaitzeko aukera.
                     // Erosi dituzun sarreren tiketa
