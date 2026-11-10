@@ -24,7 +24,7 @@ public class Zinemazubieta {
                  for(int i =0; i< pelikulak.length; i++){
                     pelikulakList.add(pelikulak[i]);
                     for(int j = 0; j<generoak.length; j++){
-                        switch (generoak [ j ]) {
+                        switch (generoak [ j ]) {   
                             case 0 -> generoakList.add("  (haurrentzako)  ");
                             case 1 -> generoakList.add("  (superheroiak)  ");
                             case 2 -> generoakList.add("  (thriller)  ");
