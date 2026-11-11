@@ -4,10 +4,12 @@ import java.util.Scanner;
 
 public class Zinemazubieta {
 
-    public static void main(String[] args) {
+    public static void main (String[] args) {
         Scanner sc = new Scanner(System.in);
         ArrayList<String> pelikulakList = new ArrayList<>();
         ArrayList<String> generoakList = new ArrayList<>();
+        // Pelikula bakoitzaren genero-kodea gordetzen du, pelikulen zerrendarekin batera.
+        ArrayList<Integer> generoKodeak = new ArrayList<>();
         ArrayList<String> aretoakList = new ArrayList<>();
         ArrayList<String> egunakList = new ArrayList<>();
         ArrayList<String> erabiltzaileak = new ArrayList<>();
@@ -39,6 +41,8 @@ public class Zinemazubieta {
 
         for (int i = 0; i < pelikulak.length; i++) {
             pelikulakList.add(pelikulak[i]);
+            // Generoaren kodea zerrenda dinamikora gehitzen da pelikula bakoitzarentzat.
+            generoKodeak.add(generoak[i]);
 
             switch (generoak[i]) {
                 case 0 ->
@@ -71,20 +75,7 @@ public class Zinemazubieta {
         int auk = 0, def = 0, aukeguna = 0, aukaldat = 0, sarrerakont = 0, sarrerakop = 0,
                 aukeros = 0, aldataukpelik = 0, saiokop = astelehena.length;
 
-        for (int egun = 0; egun < kartelera.length; egun++) {
-            ArrayList<Integer> aretoakErabilita = new ArrayList<>();
-            for (int saio = 0; saio < saiokop; saio++) {
-                int pelikula;
-                int aretoa;
-                do {
-                    pelikula = (int) (Math.random() * pelikulak.length);
-                    aretoa = generoak[pelikula];
-                } while (aretoakErabilita.contains(aretoa));
-
-                kartelera[egun][saio] = pelikula;
-                aretoakErabilita.add(aretoa);
-            }
-        }
+        
         System.out.println("Ongi etorri ZinemaZubietara!!");
         // def aldagaia kontrolatuko du menua berriro erakustea funtzio bat egin ondoren
         // def(definitivo)
@@ -103,7 +94,7 @@ public class Zinemazubieta {
                     aukeguna = 0;
                     aukeguna = Konprobatu(aukeguna, 6, sc);
                     // Aukeratutako egunean dauden pelikulak inprimatuko ditu.
-                    Kartelera(aukeguna, saiokop, egunak, generoak, pelikulak, gelak, kartelera);
+                    Kartelera(aukeguna, saiokop, egunak, generoakList, pelikulakList, gelak, generoKodeak, kartelera);
                     // Eguneko kartelera aldatu daiteke, beraz aldatzeko aukera eman, baino soilik
                     // kontraseña ondo jartzen badezu
                     System.out.println(" " + egunak[aukeguna - 1]
@@ -121,14 +112,14 @@ public class Zinemazubieta {
                                 System.out.println("Zein pelikula aldatu nahi duzu?");
                                 // Baliozko aukera bat sartu den edo ez kontrolatu
                                 aukaldat = Konprobatu(aukaldat, astelehena.length, sc);
-                                System.out.println(pelikulak[kartelera[aukeguna - 1][aukaldat - 1]]// [aukaldat-1]
+                                System.out.println(pelikulakList.get(kartelera[aukeguna - 1][aukaldat - 1])// [aukaldat-1]
                                         // zergatik? 0-4
                                         // delako!!
                                         + " pelikula aldatu nahi duzu, zer pelikulagatik aldatu nahi duzu? hauek dira pelikula guztiak:");
                                 // zineman dauden pelikula guztiak imprimatu jakiteko zein pelikulagatik aldatu.
                                 System.out.println("------------PELIKULAK------------");
                                 for (int i = 0; i < pelikulak.length; i++) {
-                                    System.out.println((i + 1) + ". " + pelikulak[i]);
+                                    System.out.println((i + 1) + ". " + pelikulakList.get(i));
                                 }
                                 // Behin erabakita zein pelikulagatik aldatu nahi dezun aldatu.
                                 aldataukpelik = sc.nextInt();
@@ -154,7 +145,7 @@ public class Zinemazubieta {
                         System.out.println("Zein pelikularentzat erosi nahi dituzu sarrerak?");
                         // Egun horretan proiektatuko diren pelikula guztiak imprimatuko dira genereo
                         // eta orduekin
-                        Kartelera(aukeguna, saiokop, egunak, generoak, pelikulak, gelak, kartelera);
+                        Kartelera(aukeguna, saiokop, egunak, generoakList, pelikulakList, gelak, generoKodeak, kartelera);
                         aukeros = 0;
                         /*
                          * aukeros reiniziatu, bestela ez digu beste pelikula batentzat sarrerak erosten
@@ -230,12 +221,12 @@ public class Zinemazubieta {
                 case 2:
                     // Pelikulen informazioa erakutsi, asteko gela eta pelikula kopurua
                     System.out.println("-----------PELIKULEN INFORMAZIOA-----------\n Pelikula kopurua: "
-                            + pelikulak.length + "\n Gelen Kopurua: " + gelak.length + "\n");
+                            + pelikulakList.size() + "\n Gelen Kopurua: " + gelak.length + "\n");
                     for (int g = 0; g < gelak.length; g++) {
                         System.out.println("-----------" + gelak[g].toUpperCase() + "-----------");
-                        for (int i = 0; i < pelikulak.length; i++) {
-                            if (generoak[i] == g) {
-                                System.out.println(pelikulak[i]);
+                        for (int i = 0; i < pelikulakList.size(); i++) {
+                            if (generoKodeak.get(i) == g) {
+                                System.out.println(pelikulakList.get(i));
                             }
                         }
 
@@ -285,10 +276,34 @@ public class Zinemazubieta {
                                     sc.nextLine();
                                     String peliberri = sc.nextLine();
                                     pelikulakList.add(peliberri);
-                                    System.out.println("Sartu pelikularen generoa:");
-                                    String generoBerri = sc.nextLine();
-                                    generoakList.add(" (" + generoBerri + ")");
+                                    System.out.println("Sartu pelikularen generoa (haurrentzako, superheroiak, thriller, zientzia fikzioa edo komedia):");
+                                    String generoBerri = sc.nextLine().trim();
+                                    int generoKodeBerri = GeneroKodea(generoBerri);
+                                    while (generoKodeBerri < 0) {
+                                        System.out.println("Genero hori ez da baliozkoa. Sartu: haurrentzako, superheroiak, thriller, zientzia fikzioa edo komedia.");
+                                        generoBerri = sc.nextLine().trim();
+                                        generoKodeBerri = GeneroKodea(generoBerri);
+                                    }
+                                    generoakList.add(generoBerri);
+                                    // Genero-kodea ere gordetzen da, pelikula berriak array finkoaren muga gaindi ez dezan.
+                                    generoKodeak.add(generoKodeBerri);
 
+                                    // Kartelera berrantolatu eta saio bakoitzean gela desberdina esleitzen du.
+                                    for (int egun = 0; egun < kartelera.length; egun++) {
+                                        ArrayList<Integer> aretoakErabilita = new ArrayList<>();
+                                        for (int saio = 0; saio < saiokop; saio++) {
+                                            int pelikula;
+                                            int aretoa;
+                                            do {
+                                                // Zerrendako edozein pelikula hautatzen du, azkena barne.
+                                                pelikula = (int) (Math.random() * pelikulakList.size());
+                                                aretoa = generoKodeak.get(pelikula);
+                                            } while (aretoakErabilita.contains(aretoa));
+
+                                            kartelera[egun][saio] = pelikula;
+                                            aretoakErabilita.add(aretoa);
+                                        }
+                                    }
                                     break;
                                 case 2:
                                     for (int i = 0; i < pelikulakList.size(); i++) {
@@ -312,9 +327,16 @@ public class Zinemazubieta {
                                     } else if (auk3 == 2) {
                                         System.out.println("sartu pelikularen genero berria: ");
                                         sc.nextLine();
-                                        String generoberri = sc.nextLine();
-
+                                        String generoberri = sc.nextLine().trim();
+                                        int generoKodeAldatu = GeneroKodea(generoberri);
+                                        while (generoKodeAldatu < 0) {
+                                            System.out.println("Genero hori ez da baliozkoa. Sartu: haurrentzako, superheroiak, thriller, zientzia fikzioa edo komedia.");
+                                            generoberri = sc.nextLine().trim();
+                                            generoKodeAldatu = GeneroKodea(generoberri);
+                                        }
                                         generoakList.set(auk2 - 1, generoberri);
+                                        // Bi genero-zerrendak eguneratzen dira gelaren esleipena ere aldatzeko.
+                                        generoKodeak.set(auk2 - 1, generoKodeAldatu);
                                     } else {
                                         System.out.println("indize hori ez da esistitzen");
                                     }
@@ -332,6 +354,8 @@ public class Zinemazubieta {
                                     } else {
                                         pelikulakList.remove(auk4 - 1);
                                         generoakList.remove(auk4 - 1);
+                                        // Indizeak lerrokatuta mantentzeko, genero-kodea ere ezabatzen da.
+                                        generoKodeak.remove(auk4 - 1);
                                     }
 
                                     break;
@@ -366,7 +390,7 @@ public class Zinemazubieta {
                             for (int j = 0; j < 5; j++) {
                                 if (sarrerak[i][j] != 0) {
                                     System.out.println("Eguna: " + egunak[i] + ", Pelikula: "
-                                            + pelikulak[kartelera[i][j]] + ", Sarrera kopurua: " + sarrerak[i][j]);
+                                            + pelikulakList.get(kartelera[i][j]) + ", Sarrera kopurua: " + sarrerak[i][j]);
                                 }
                             }
                         }
@@ -383,8 +407,8 @@ public class Zinemazubieta {
         sc.close();
     }
 
-    static void Kartelera(int aukeguna, int saiokop, String[] egunak, int[] generoak, String[] pelikulak,
-            String[] gelak, int[][] kartelera) {
+    static void Kartelera(int aukeguna, int saiokop, String[] egunak, ArrayList<String> generoakList, ArrayList<String> pelikulakList,
+            String[] gelak, ArrayList<Integer> generoKodeak, int[][] kartelera) {
         // Aukeratutako egunean dauden pelikulak inprimatuko ditu.
         System.out.println(" " + egunak[aukeguna - 1] + " egunean proiektatuko diren pelikulak:");
         /*
@@ -392,17 +416,17 @@ public class Zinemazubieta {
          * proiektatu 15:00 baino lehen
          */
         for (int i = 0; i < saiokop; i++) {
-            System.out.print("    " + (i + 1) + ". " + pelikulak[kartelera[aukeguna - 1][i]] + " ");
-            for (int l = 0; l < 35 - pelikulak[kartelera[aukeguna - 1][i]].length(); l++) {
+            System.out.print("    " + (i + 1) + ". " + pelikulakList.get(kartelera[aukeguna - 1][i]) + " ");
+            for (int l = 0; l < 35 - pelikulakList.get(kartelera[aukeguna - 1][i]).length(); l++) {
                 System.out.print("-");
-                if (l == 35 - pelikulak[kartelera[aukeguna - 1][i]].length()) {
+                if (l == 35 - pelikulakList.get(kartelera[aukeguna - 1][i]).length()) {
                     System.out.print(" ");
                 }
             }
-            System.out.print(gelak[generoak[kartelera[aukeguna - 1][i]]]);
-            for (int l = 0; l < 25 - gelak[generoak[kartelera[aukeguna - 1][i]]].length(); l++) {
+            System.out.print(gelak[generoKodeak.get(kartelera[aukeguna - 1][i])]);
+            for (int l = 0; l < 25 - gelak[generoKodeak.get(kartelera[aukeguna - 1][i])].length(); l++) {
                 System.out.print("-");
-                if (l == 25 - gelak[generoak[kartelera[aukeguna - 1][i]]].length() - 1) {
+                if (l == 25 - gelak[generoKodeak.get(kartelera[aukeguna - 1][i])].length() - 1) {
                     System.out.print(" ");
                 }
             }
@@ -414,6 +438,18 @@ public class Zinemazubieta {
             }
 
         }
+    }
+
+    // Testuz sartutako generoa gelaren indize bihurtzen du.
+    static int GeneroKodea(String genero) {
+        return switch (genero.trim().toLowerCase()) {
+            case "haurrentzako" -> 0;
+            case "superheroiak" -> 1;
+            case "thriller" -> 2;
+            case "zientzia fikzioa" -> 3;
+            case "komedia" -> 4;
+            default -> -1;
+        };
     }
 
     static int Konprobatu(int aukera, int luzeera, Scanner sc) {
