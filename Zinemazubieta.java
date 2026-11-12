@@ -12,7 +12,6 @@ public class Zinemazubieta {
         // batera.
         ArrayList<Integer> generoKodeak = new ArrayList<>();
         ArrayList<String> aretoakList = new ArrayList<>();
-        ArrayList<String> egunakList = new ArrayList<>();
         ArrayList<String> erabiltzaileak = new ArrayList<>();
         ArrayList<String> pasahitzak = new ArrayList<>();
 
@@ -68,7 +67,7 @@ public class Zinemazubieta {
         // Kartelera matrizea sortu det eta posizio bakoitzan asteko egun bakoitzaren
         // array-a, hau da egun horretan egongo diren pelikulak gordetzen dira
         int[][] kartelera = new int[7][5], sarrerak = new int[7][5];
-        char aldat = 'B', aukeraeros = 'B';
+        char aukeraeros = 'B';
         kartelera[0] = astelehena;
         kartelera[1] = asteartea;
         kartelera[2] = asteazkena;
@@ -76,8 +75,8 @@ public class Zinemazubieta {
         kartelera[4] = ostirala;
         kartelera[5] = larunbata;
         kartelera[6] = igandea;
-        int auk = 0, def = 0, aukeguna = 0, aukaldat = 0, sarrerakont = 0, sarrerakop = 0,
-                aukeros = 0, aldataukpelik = 0, saiokop = astelehena.length;
+        int auk = 0, def = 0, aukeguna = 0, sarrerakont = 0, sarrerakop = 0,
+                aukeros = 0, saiokop = astelehena.length;
         for (int egun = 0; egun < kartelera.length; egun++) {
             ArrayList<Integer> aretoakErabilita = new ArrayList<>();
             for (int saio = 0; saio < saiokop; saio++) {
