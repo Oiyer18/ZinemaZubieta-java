@@ -3,10 +3,8 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-// ZinemaZubietako menuak eta sarreren salmenta kudeatzen dituen programa.
-public class Zinemazubieta {
 
-    // Programaren datuak hasieratu eta menu nagusia abiarazten ditu.
+public class Zinemazubieta {
     public static void main(String[] args) {
         // Erabiltzailearen teklatuko sarrerak irakurtzeko.
         Scanner sc = new Scanner(System.in);
