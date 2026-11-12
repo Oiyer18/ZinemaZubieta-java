@@ -523,8 +523,8 @@ public class Zinemazubieta {
         // Aukeratutako egunean dauden pelikulak inprimatuko ditu.
         System.out.println(" " + egunak[aukeguna - 1] + " egunean proiektatuko diren pelikulak:");
         /*
-         * Astean zenhar den kontrolatzen du zeren astean zehar ezin dira pelikulak
-         * proiektatu 15:00 baino lehen
+         /* Astean zenhar den kontrolatzen du zeren astean zehar ezin dira pelikulak
+         /* proiektatu 15:00 baino lehen
          */
         for (int i = 0; i < saiokop; i++) {
             System.out.print("    " + (i + 1) + ". " + pelikulakList.get(kartelera[aukeguna - 1][i]) + " ");
