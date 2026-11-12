@@ -114,45 +114,6 @@ for (int egun = 0; egun < kartelera.length; egun++) {
                     Kartelera(aukeguna, saiokop, egunak, generoakList, pelikulakList, gelak, generoKodeak, kartelera);
                     // Eguneko kartelera aldatu daiteke, beraz aldatzeko aukera eman, baino soilik
                     // kontraseña ondo jartzen badezu
-                   /*  System.out.println(" " + egunak[aukeguna - 1]
-                            + " eguneko kartelera aldatu nahi badezu zineman egin behar dezu lan, kartelera aldatu nahi dezu? (B/E)");
-                    if (sc.next().charAt(0) == 'B') {
-                        System.out
-                                .println("Jakiteko hemen lana egiten duzun edo ez kontraseina sartu (1-9 zenbaki bat)");
-                        if (sc.nextInt() == 8) {
-                            // Kartelera aldatzeko aukera eman soilik aldat!=E (Ez) bada
-                            aldat = 'B';
-                            while (aldat != 'E') {
-                                // aukaldat aldagaian gordeko da aldatu nahi dezun pelikularen zenbakia
-                                // aukaldat reiniziatu pelikula bat baino gehiago aldatu ditzazkezulako
-                                aukaldat = 0;
-                                System.out.println("Zein pelikula aldatu nahi duzu?");
-                                // Baliozko aukera bat sartu den edo ez kontrolatu
-                                aukaldat = Konprobatu(aukaldat, astelehena.length, sc);
-                                System.out.println(pelikulakList.get(kartelera[aukeguna - 1][aukaldat - 1])// [aukaldat-1]
-                                        // zergatik? 0-4
-                                        // delako!!
-                                        + " pelikula aldatu nahi duzu, zer pelikulagatik aldatu nahi duzu? hauek dira pelikula guztiak:");
-                                // zineman dauden pelikula guztiak imprimatu jakiteko zein pelikulagatik aldatu.
-                                System.out.println("------------PELIKULAK------------");
-                                for (int i = 0; i < pelikulak.length; i++) {
-                                    System.out.println((i + 1) + ". " + pelikulakList.get(i));
-                                }
-                                // Behin erabakita zein pelikulagatik aldatu nahi dezun aldatu.
-                                aldataukpelik = sc.nextInt();
-                                // konprobatu aukera egokia dela
-                                Konprobatu(aldataukpelik, 15, sc);
-                                kartelera[aukeguna - 1][aukaldat - 1] = aldataukpelik - 1;
-                                // Kartelera aldatzen jarraitzeko aukera eman
-                                System.out.println("Beste pelikularik aldatu nahi duzu? (B/E)");
-                                // Aldatzen jarraitzeko (E) ez den edozein gauza jarri, B (Bai) aukera eman
-                                aldat = sc.next().charAt(0);
-                            }
-                        } // Ez daki kontraseña beraz ez du hemen lana egiten
-                        else {
-                            System.out.println("Ez duzu hemen lan egiten beraz ezin duzu kartelera aldatu");
-                        }
-                    } */
                    
                     // Sarrerak erosteko aukera hemen
                     System.out.println("SARRERAK EROSI NAHI DITUZU? GEHIENEZ 4 AHAL DITUZU EROSI (B/E)");
