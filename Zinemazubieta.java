@@ -103,11 +103,11 @@ public class Zinemazubieta {
                     "-----------MENU NAGUSIA-----------\n 1.Asteko eguna aukeratu\n 2.Zinemaren informazio orokorra\n 3.Kokapena\n 4.Irekiera ordutegia\n 5.Administrazioa\n 6.Irten\n----------------------------------\n Zer egin nahi duzu? sartu zenbakia.");
             // sartutako aukera baliozkoa den edo ez kontrolatu
             auk = 0;
-           
+
             try {
-             auk = Konprobatu(auk, 6, sc);
-            } catch (InputMismatchException e){
-            System.err.println("ERROREA: zenbakia ez da");
+                auk = Konprobatu(auk, 6, sc);
+            } catch (InputMismatchException e) {
+                System.err.println("ERROREA: zenbakia ez da");
             }
             switch (auk) {
                 case 1:
@@ -476,12 +476,11 @@ public class Zinemazubieta {
                                         }
                                         System.out.println(
                                                 "zein pelikula ezabatu nahi dezu (1-" + pelikulakList.size() + ")?");
-                                        int auk4 = Konprobatu(0,pelikulakList.size(), sc);
-                                            pelikulakList.remove(auk4 - 1);
-                                            generoakList.remove(auk4 - 1);
-                                            // Indizeak lerrokatuta mantentzeko, genero-kodea ere ezabatzen da.
-                                            generoKodeak.remove(auk4 - 1);
-                                        
+                                        int auk4 = Konprobatu(0, pelikulakList.size(), sc);
+                                        pelikulakList.remove(auk4 - 1);
+                                        generoakList.remove(auk4 - 1);
+                                        // Indizeak lerrokatuta mantentzeko, genero-kodea ere ezabatzen da.
+                                        generoKodeak.remove(auk4 - 1);
 
                                         break;
                                     case 4:
@@ -538,8 +537,8 @@ public class Zinemazubieta {
         // Aukeratutako egunean dauden pelikulak inprimatuko ditu.
         System.out.println(" " + egunak[aukeguna - 1] + " egunean proiektatuko diren pelikulak:");
         /*
-         /* Astean zenhar den kontrolatzen du zeren astean zehar ezin dira pelikulak
-         /* proiektatu 15:00 baino lehen
+         * /* Astean zenhar den kontrolatzen du zeren astean zehar ezin dira pelikulak
+         * /* proiektatu 15:00 baino lehen
          */
         for (int i = 0; i < saiokop; i++) {
             System.out.print("    " + (i + 1) + ". " + pelikulakList.get(kartelera[aukeguna - 1][i]) + " ");
