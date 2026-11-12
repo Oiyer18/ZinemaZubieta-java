@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Zinemazubieta {
@@ -102,7 +103,12 @@ public class Zinemazubieta {
                     "-----------MENU NAGUSIA-----------\n 1.Asteko eguna aukeratu\n 2.Zinemaren informazio orokorra\n 3.Kokapena\n 4.Irekiera ordutegia\n 5.Administrazioa\n 6.Irten\n----------------------------------\n Zer egin nahi duzu? sartu zenbakia.");
             // sartutako aukera baliozkoa den edo ez kontrolatu
             auk = 0;
-            auk = Konprobatu(auk, 6, sc);
+           
+            try {
+             auk = Konprobatu(auk, 6, sc);
+            } catch (InputMismatchException e){
+            System.err.println("ERROREA: zenbakia ez da");
+            }
             switch (auk) {
                 case 1:
                     do {
@@ -119,8 +125,8 @@ public class Zinemazubieta {
 
                         // Sarrerak erosteko aukera hemen
                         System.out.println("SARRERAK EROSI NAHI DITUZU? GEHIENEZ 4 AHAL DITUZU EROSI (B/E)");
-                        // aukeraerosen gorde ea sarrerak erosi nahi dituen ala ez
-                        aukeraeros = sc.next().charAt(0);
+                        // aukeraerosen gorde ea sarrerak erosi nahi dituen ala ez.
+                        aukeraeros = aukIrakBE(sc);
 
                         while (aukeraeros == 'B' && sarrerakont < 4) {
                             System.out.println("Zein pelikularentzat erosi nahi dituzu sarrerak?");
@@ -142,7 +148,20 @@ public class Zinemazubieta {
                             } else {
                                 // zenbat sarrera erosi nahi diren galdetu
                                 System.out.println("Zenbat sarrera erosi nahi dituzu?");
-                                sarrerakop = sc.nextInt();
+                                while (true) {
+                                    if (!sc.hasNextInt()) {
+                                        System.out.println("ERROREA: sartu zenbaki bat.");
+                                        sc.next();
+                                        continue;
+                                    }
+
+                                    sarrerakop = sc.nextInt();
+                                    if (sarrerakop >= 1 && sarrerakop <= 4) {
+                                        break;
+                                    }
+
+                                    System.out.println("Sartu 1 eta 4 arteko zenbaki bat.");
+                                }
                                 /*
                                  * sarrerakop aldagaian gorde zenbat erosi nahi diren eta kartelera matrizearen
                                  * dimentsio berdineko
@@ -161,7 +180,7 @@ public class Zinemazubieta {
 
                                     System.out.println(
                                             "gehienez " + sarrerakMAX + " sarrera erosi ahalko dituzula? (B/E)");
-                                    aukeraeros = sc.next().charAt(0);
+                                    aukeraeros = aukIrakBE(sc);
 
                                     if (aukeraeros == 'B') {
                                         sarrerakop = sarrerakMAX;
@@ -232,7 +251,7 @@ public class Zinemazubieta {
                                             System.out.println(
                                                     "Beste pelikula batentzat sarrerak erosi nahi dituzu? (B/E) gogoratu 4 direla maximoa eta zuk "
                                                             + sarrerakont + " dituzula jada");
-                                            aukeraeros = sc.next().charAt(0);
+                                            aukeraeros = aukIrakBE(sc);
                                             if (aukeraeros == 'E') {
                                                 System.out.println("Eskerrikasko ZinemaZubietan erosteagatik");
                                             }
@@ -309,7 +328,7 @@ public class Zinemazubieta {
                                             System.out.println(
                                                     "Beste pelikula batentzat sarrerak erosi nahi dituzu? (B/E) gogoratu 4 direla maximoa eta zuk "
                                                             + sarrerakont + " dituzula jada");
-                                            aukeraeros = sc.next().charAt(0);
+                                            aukeraeros = aukIrakBE(sc);
                                             if (aukeraeros == 'E') {
                                                 System.out.println("Eskerrikasko ZinemaZubietan erosteagatik");
                                             }
@@ -373,7 +392,7 @@ public class Zinemazubieta {
                                 System.out.println("-----------------------------------------");
                                 System.out.println("");
                                 System.out.println("Aukeratu zenbaki bat (1-5)");
-                                int auk2 = sc.nextInt();
+                                int auk2 = Konprobatu(0, 5, sc);
 
                                 switch (auk2) {
                                     case 1:
@@ -421,11 +440,11 @@ public class Zinemazubieta {
                                         System.out.println("zein pelikularen informazioa aldatu nahi dezu (1-"
                                                 + pelikulakList.size() + ")?");
                                         System.out.println("");
-                                        auk2 = sc.nextInt();
+                                        auk2 = Konprobatu(0, pelikulakList.size(), sc);
                                         System.out.println("");
                                         System.out.println("zein datu aldatu nahi duzu?");
                                         System.out.println("1. Pelikularen izena   2.pelikularen generoa");
-                                        int auk3 = sc.nextInt();
+                                        int auk3 = Konprobatu(0, 2, sc);
                                         if (auk3 == 1) {
                                             System.out.println("sartu pelikularen izen berria:");
                                             sc.nextLine();
@@ -457,16 +476,12 @@ public class Zinemazubieta {
                                         }
                                         System.out.println(
                                                 "zein pelikula ezabatu nahi dezu (1-" + pelikulakList.size() + ")?");
-                                        int auk4 = sc.nextInt();
-
-                                        if (auk4 <= 0 || auk4 > pelikulakList.size()) {
-                                            System.out.println("indize hori ez da esistitzen");
-                                        } else {
+                                        int auk4 = Konprobatu(0,pelikulakList.size(), sc);
                                             pelikulakList.remove(auk4 - 1);
                                             generoakList.remove(auk4 - 1);
                                             // Indizeak lerrokatuta mantentzeko, genero-kodea ere ezabatzen da.
                                             generoKodeak.remove(auk4 - 1);
-                                        }
+                                        
 
                                         break;
                                     case 4:
@@ -483,7 +498,7 @@ public class Zinemazubieta {
                             }
 
                         } else {
-                            System.out.println("pasahitza gaizki jarri duzu melon");
+                            System.out.println("pasahitza gaizki jarri duzu");
                         }
                     } else {
                         System.out.println("Erabiltzailea gaizki jarri duzu");
@@ -565,6 +580,12 @@ public class Zinemazubieta {
 
     static int Konprobatu(int aukera, int luzeera, Scanner sc) {
         while (aukera <= 0 || aukera > luzeera) {
+            if (!sc.hasNextInt()) {
+                System.out.println("ERROREA: sartu zenbaki bat.");
+                sc.next();
+                continue;
+            }
+
             aukera = sc.nextInt();
             // konprobatu eguna baliozkoa dela
             if (aukera <= 0 || aukera > luzeera) {
@@ -573,5 +594,19 @@ public class Zinemazubieta {
         }
 
         return aukera;
+    }
+
+    static char aukIrakBE(Scanner sc) {
+        while (true) {
+            String respuesta = sc.next().trim();
+            if (respuesta.length() == 1) {
+                char opcion = Character.toUpperCase(respuesta.charAt(0));
+                if (opcion == 'B' || opcion == 'E') {
+                    return opcion;
+                }
+            }
+
+            System.out.println("ERROREA: B edo E idatzi");
+        }
     }
 }
