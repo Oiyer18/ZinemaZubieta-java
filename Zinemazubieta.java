@@ -123,8 +123,12 @@ public class Zinemazubieta {
             }
             switch (auk) {
                 case 1:
+
                     // Egun bat hautatu, kartelera erakutsi eta sarrerak erosteko aukera ematen du.
                     do {
+                        if (sarrerakop <= 4){
+                            break;
+                        }
                         // Asteko egunak erakutsi eta hautatutako eguna balioztatu.
                         System.out.println(
                                 "---------ASTEKO EGUNAK---------\n 1.Astelehena\n 2.Asteartea\n 3.Asteazkena\n 4.Osteguna\n 5.Ostirala\n 6.Larunbata\n 7.Igandea\n---------------------------\n Erabakitzeko sartu zenbakia.");
