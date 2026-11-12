@@ -60,7 +60,6 @@ public class Zinemazubieta {
         for (int p = 0; p < gelak.length; p++) {
             aretoakList.add(gelak[p]);
         }
-
         // Kartelera matrizea sortu det eta posizio bakoitzan asteko egun bakoitzaren
         // array-a, hau da egun horretan egongo diren pelikulak gordetzen dira
         int[][] kartelera = new int[7][5], sarrerak = new int[7][5];
@@ -74,7 +73,21 @@ public class Zinemazubieta {
         kartelera[6] = igandea;
         int auk = 0, def = 0, aukeguna = 0, aukaldat = 0, sarrerakont = 0, sarrerakop = 0,
                 aukeros = 0, aldataukpelik = 0, saiokop = astelehena.length;
+for (int egun = 0; egun < kartelera.length; egun++) {
+                                        ArrayList<Integer> aretoakErabilita = new ArrayList<>();
+                                        for (int saio = 0; saio < saiokop; saio++) {
+                                            int pelikula;
+                                            int aretoa;
+                                            do {
+                                                // Zerrendako edozein pelikula hautatzen du, azkena barne.
+                                                pelikula = (int) (Math.random() * pelikulakList.size());
+                                                aretoa = generoKodeak.get(pelikula);
+                                            } while (aretoakErabilita.contains(aretoa));
 
+                                            kartelera[egun][saio] = pelikula;
+                                            aretoakErabilita.add(aretoa);
+                                        }
+                                    }
         
         System.out.println("Ongi etorri ZinemaZubietara!!");
         // def aldagaia kontrolatuko du menua berriro erakustea funtzio bat egin ondoren
