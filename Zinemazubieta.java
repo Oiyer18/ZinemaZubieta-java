@@ -37,8 +37,11 @@ public class Zinemazubieta {
         // ditugulako
         int[] astelehena = new int[5], asteartea = new int[5], asteazkena = new int[5], osteguna = new int[5],
                 ostirala = new int[5], larunbata = new int[5], igandea = new int[5],
-                generoak = {0, 0, 0, 0, 1, 2, 3, 2, 0, 1, 4, 2, 2, 4, 2};
-
+                generoak = { 0, 0, 0, 0, 1, 2, 3, 2, 0, 1, 4, 2, 2, 4, 2 };
+        int [][]sarrerakopMAX = new int [7][5];
+        //hemen astelehenean proiektatuko den lehen pelikularen aretoa beteta dagoela simulatuko dugu.
+        sarrerakopMAX [0][0] = 25;
+        sarrerakopMAX [0][1] = 23;
         for (int i = 0; i < pelikulak.length; i++) {
             pelikulakList.add(pelikulak[i]);
             // Generoaren kodea zerrenda dinamikora gehitzen da pelikula bakoitzarentzat.
@@ -71,7 +74,7 @@ public class Zinemazubieta {
         kartelera[4] = ostirala;
         kartelera[5] = larunbata;
         kartelera[6] = igandea;
-        int auk = 0, def = 0, aukeguna = 0, aukaldat = 0, sarrerakont = 0, sarrerakop = 0,
+        int auk = 0, def = 0, aukeguna = 0, aukaldat = 0, sarrerakont = 0, sarrerakop = 0, 
                 aukeros = 0, aldataukpelik = 0, saiokop = astelehena.length;
 for (int egun = 0; egun < kartelera.length; egun++) {
                                         ArrayList<Integer> aretoakErabilita = new ArrayList<>();
@@ -98,19 +101,20 @@ for (int egun = 0; egun < kartelera.length; egun++) {
                     "-----------MENU NAGUSIA-----------\n 1.Asteko eguna aukeratu\n 2.Zinemaren informazio orokorra\n 3.Kokapena\n 4.Irekiera ordutegia\n 5.Administrazioa\n 6.Irten\n----------------------------------\n Zer egin nahi duzu? sartu zenbakia.");
             // sartutako aukera baliozkoa den edo ez kontrolatu
             auk = 0;
-            auk = Konprobatu(auk, 5, sc);
+            auk = Konprobatu(auk, 6, sc);
             switch (auk) {
                 case 1:
+            do {
                     // Asteko egunen zerrenda imprimatuko du.
                     System.out.println(
                             "---------ASTEKO EGUNAK---------\n 1.Astelehena\n 2.Asteartea\n 3.Asteazkena\n 4.Osteguna\n 5.Ostirala\n 6.Larunbata\n 7.Igandea\n---------------------------\n Erabakitzeko sartu zenbakia.");
                     aukeguna = 0;
-                    aukeguna = Konprobatu(aukeguna, 6, sc);
+                    aukeguna = Konprobatu(aukeguna, egunak.length, sc);
                     // Aukeratutako egunean dauden pelikulak inprimatuko ditu.
                     Kartelera(aukeguna, saiokop, egunak, generoakList, pelikulakList, gelak, generoKodeak, kartelera);
                     // Eguneko kartelera aldatu daiteke, beraz aldatzeko aukera eman, baino soilik
                     // kontraseña ondo jartzen badezu
-                    System.out.println(" " + egunak[aukeguna - 1]
+                   /*  System.out.println(" " + egunak[aukeguna - 1]
                             + " eguneko kartelera aldatu nahi badezu zineman egin behar dezu lan, kartelera aldatu nahi dezu? (B/E)");
                     if (sc.next().charAt(0) == 'B') {
                         System.out
@@ -148,12 +152,13 @@ for (int egun = 0; egun < kartelera.length; egun++) {
                         else {
                             System.out.println("Ez duzu hemen lan egiten beraz ezin duzu kartelera aldatu");
                         }
-                    }
-
+                    } */
+                   
                     // Sarrerak erosteko aukera hemen
                     System.out.println("SARRERAK EROSI NAHI DITUZU? GEHIENEZ 4 AHAL DITUZU EROSI (B/E)");
                     // aukeraerosen gorde ea sarrerak erosi nahi dituen ala ez
                     aukeraeros = sc.next().charAt(0);
+                    
                     while (aukeraeros == 'B' && sarrerakont < 4) {
                         System.out.println("Zein pelikularentzat erosi nahi dituzu sarrerak?");
                         // Egun horretan proiektatuko diren pelikula guztiak imprimatuko dira genereo
@@ -164,8 +169,14 @@ for (int egun = 0; egun < kartelera.length; egun++) {
                          * aukeros reiniziatu, bestela ez digu beste pelikula batentzat sarrerak erosten
                          * aukera egokia den edo ez jakiteko
                          */
-                        Konprobatu(aukeros, astelehena.length, sc);
-                        // zenbat sarrera erosi nahi diren galdetu
+                        
+                        aukeros = Konprobatu(aukeros, astelehena.length, sc) -1;
+                        if (sarrerakopMAX [aukeguna-1][aukeros]==25){
+                            System.out.println ("");
+                            System.out.println("aforoa beteta dago, aukeratu beste pelikula bat");
+                            System.out.println("");
+                        } else {
+                            // zenbat sarrera erosi nahi diren galdetu
                         System.out.println("Zenbat sarrera erosi nahi dituzu?");
                         sarrerakop = sc.nextInt();
                         /*
@@ -177,58 +188,153 @@ for (int egun = 0; egun < kartelera.length; egun++) {
                          * sarrera kopuru totala
                          * Sarrera gehiago erosi ditzazkezu beraz aukera ematen dizu.
                          */
-                        if (sarrerakont + sarrerakop >= 4) {
-                            if (sarrerakont + sarrerakop == 4) {
-                                System.out.println("4 sarrera erosi dituzu guztira");
-                                if (sarrerak[aukeguna - 1][aukeros] != 0) {
-                                    sarrerak[aukeguna - 1][aukeros] = sarrerak[aukeguna - 1][aukeros] + sarrerakop;
-                                } else {
-                                    sarrerak[aukeguna - 1][aukeros] = sarrerakop;
-                                }
-                                sarrerakont = sarrerakont + sarrerakop;
+                        if ((sarrerakopMAX [aukeguna-1][aukeros]+ sarrerakop)> 25){
+                            System.out.print("Erositako sarrera kopurua aforo maximoa gainditzen du, aurrera segi nahi duzu kontuan hartuta ");
+                            int aux = sarrerakopMAX [aukeguna-1][aukeros] + sarrerakop;
+                            int exc = aux - 25;
+                            int sarrerakMAX = sarrerakop - exc;
 
-                            } else if (sarrerakont + sarrerakop > 4) {
-                                System.out.println(
-                                        "Erositako sarrera kopurua 4 baino gehiago da, beraz azkeneko pelikularen sarrerak murriztu zaizkizu.");
+                            System.out.println( "gehienez " + sarrerakMAX + " sarrera erosi ahalko dituzula? (B/E)");
+                            aukeraeros = sc.next().charAt(0);
+
+                            if (aukeraeros =='B'){
+                                sarrerakop = sarrerakMAX;
+                                if (sarrerakont + sarrerakop >= 4) {
+                                if (sarrerakont + sarrerakop == 4) {
+                                    System.out.println("4 sarrera erosi dituzu guztira");
+                                    if (sarrerak[aukeguna - 1][aukeros] != 0) {
+                                        sarrerak[aukeguna - 1][aukeros] = sarrerak[aukeguna - 1][aukeros] + sarrerakop;
+                                    } else {
+                                        sarrerak[aukeguna - 1][aukeros] = sarrerakop;
+                                    }
+                                    sarrerakont = sarrerakont + sarrerakop;
+                                    sarrerakopMAX [aukeguna-1][aukeros] = sarrerakopMAX [aukeguna-1][aukeros] + sarrerakont;
+                                    System.out.println(sarrerakopMAX [aukeguna-1][aukeros]);
+                                } else if (sarrerakont + sarrerakop > 4) {
+                                    System.out.println( "Erositako sarrera kopurua 4 baino gehiago da, beraz azkeneko pelikularen sarrerak murriztu zaizkizu.");
+                                    // 2 aldiz segidan erosten badituzu sarrerak egun berdinarentzat pelikula
+                                    // berdinarentzat
+                                    // detektatuko du eta lehen zeudenak berrietara gehituko ditu
+                                    if (sarrerak[aukeguna - 1][aukeros] != 0) {
+                                        sarrerak[aukeguna - 1][aukeros] = sarrerak[aukeguna - 1][aukeros] + sarrerakop;
+                                        if (sarrerak[aukeguna - 1][aukeros] + sarrerakop >= 4) {
+                                            sarrerak[aukeguna - 1][aukeros] = 4;
+                                        }
+                                    }
+                                    // ez dira lehenagotikan sarrerak erosi
+                                    else {
+                                        sarrerak[aukeguna - 1][aukeros] = 4 - sarrerakont;
+                                    }
+                                    sarrerakont = 4;
+                                    sarrerakopMAX [aukeguna-1][aukeros] = sarrerakopMAX [aukeguna-1][aukeros] + sarrerakont;
+                                   
+                                }
+                                aukeraeros = 'E';
+                            }
+                            // 4 sarrera baino gutxiago erosi dituzu
+                            if (sarrerakont + sarrerakop < 4) {
                                 // 2 aldiz segidan erosten badituzu sarrerak egun berdinarentzat pelikula
                                 // berdinarentzat
                                 // detektatuko du eta lehen zeudenak berrietara gehituko ditu
                                 if (sarrerak[aukeguna - 1][aukeros] != 0) {
                                     sarrerak[aukeguna - 1][aukeros] = sarrerak[aukeguna - 1][aukeros] + sarrerakop;
-                                    if (sarrerak[aukeguna - 1][aukeros] + sarrerakop >= 4) {
-                                        sarrerak[aukeguna - 1][aukeros] = 4;
-                                    }
-                                } // ez dira lehenagotikan sarrerak erosi
-                                else {
-                                    sarrerak[aukeguna - 1][aukeros] = 4 - sarrerakont;
+                                    sarrerakopMAX [aukeguna-1][aukeros] = sarrerakopMAX [aukeguna-1][aukeros]+sarrerakont;
+                                   
                                 }
-                                sarrerakont = 4;
-                            }
-                            aukeraeros = 'E';
-                        }
-                        // 4 sarrera baino gutxiago erosi dituzu
-                        if (sarrerakont + sarrerakop < 4) {
-                            // 2 aldiz segidan erosten badituzu sarrerak egun berdinarentzat pelikula
-                            // berdinarentzat
-                            // detektatuko du eta lehen zeudenak berrietara gehituko ditu
-                            if (sarrerak[aukeguna - 1][aukeros] != 0) {
-                                sarrerak[aukeguna - 1][aukeros] = sarrerak[aukeguna - 1][aukeros] + sarrerakop;
-                            } // lehen ez zeuden sarrerak erosita
-                            else {
-                                sarrerak[aukeguna - 1][aukeros] = sarrerakop;
-                            }
-                            // gehiago erosi nahi duzun edo ez galdetu
-                            sarrerakont = sarrerakont + sarrerakop;
-                            System.out.println(
-                                    "Beste pelikula batentzat sarrerak erosi nahi dituzu? (B/E) gogoratu 4 direla maximoa eta zuk "
-                                    + sarrerakont + " dituzula jada");
-                            aukeraeros = sc.next().charAt(0);
-                            if (aukeraeros == 'E') {
-                                System.out.println("Eskerrikasko ZinemaZubietan erosteagatik");
-                            }
-                        }
+                                // lehen ez zeuden sarrerak erosita
+                                else {
+                                    sarrerak[aukeguna - 1][aukeros] = sarrerakop;
+                                    sarrerakopMAX [aukeguna-1][aukeros] = sarrerakopMAX [aukeguna-1][aukeros] + sarrerakop;
+                                    
+                                }
+                                // gehiago erosi nahi duzun edo ez galdetu
+                                sarrerakont = sarrerakont + sarrerakop;
 
-                    }
+                                System.out.println(
+                                        "Beste pelikula batentzat sarrerak erosi nahi dituzu? (B/E) gogoratu 4 direla maximoa eta zuk "
+                                                + sarrerakont + " dituzula jada");
+                                aukeraeros = sc.next().charAt(0);
+                                if (aukeraeros == 'E') {
+                                    System.out.println("Eskerrikasko ZinemaZubietan erosteagatik");
+                                }
+                            }
+                            } else {
+                               aukeraeros = 'E';
+                            }
+                        } else {
+                            if (aukeraeros =='B'){
+                                if (sarrerakont + sarrerakop >= 4) {
+                                if (sarrerakont + sarrerakop == 4) {
+                                    System.out.println("4 sarrera erosi dituzu guztira");
+                                    if (sarrerak[aukeguna - 1][aukeros] != 0) {
+                                        sarrerak[aukeguna - 1][aukeros] = sarrerak[aukeguna - 1][aukeros] + sarrerakop;
+                                    } else {
+                                        sarrerak[aukeguna - 1][aukeros] = sarrerakop;
+                                    }
+                                    sarrerakont = sarrerakont + sarrerakop;
+                                    sarrerakopMAX [aukeguna-1][aukeros] = sarrerakopMAX [aukeguna-1][aukeros] + sarrerakont;
+                                  
+                                } else if (sarrerakont + sarrerakop > 4) {
+                                    System.out.println( "Erositako sarrera kopurua 4 baino gehiago da, beraz azkeneko pelikularen sarrerak murriztu zaizkizu.");
+                                    // 2 aldiz segidan erosten badituzu sarrerak egun berdinarentzat pelikula
+                                    // berdinarentzat
+                                    // detektatuko du eta lehen zeudenak berrietara gehituko ditu
+                                    if (sarrerak[aukeguna - 1][aukeros] != 0) {
+                                        sarrerak[aukeguna - 1][aukeros] = sarrerak[aukeguna - 1][aukeros] + sarrerakop;
+                                        if (sarrerak[aukeguna - 1][aukeros] + sarrerakop >= 4) {
+                                            sarrerak[aukeguna - 1][aukeros] = 4;
+                                        }
+                                    }
+                                    // ez dira lehenagotikan sarrerak erosi
+                                    else {
+                                        sarrerak[aukeguna - 1][aukeros] = 4 - sarrerakont;
+                                    }
+                                    sarrerakont = 4;
+                                    sarrerakopMAX [aukeguna-1][aukeros] = sarrerakopMAX [aukeguna-1][aukeros] + sarrerakont;
+                                    
+                                }
+                                aukeraeros = 'E';
+                            }
+                            // 4 sarrera baino gutxiago erosi dituzu
+                            if (sarrerakont + sarrerakop < 4) {
+                                // 2 aldiz segidan erosten badituzu sarrerak egun berdinarentzat pelikula
+                                // berdinarentzat
+                                // detektatuko du eta lehen zeudenak berrietara gehituko ditu
+                                if (sarrerak[aukeguna - 1][aukeros] != 0) {
+                                    sarrerak[aukeguna - 1][aukeros] = sarrerak[aukeguna - 1][aukeros] + sarrerakop;
+                                    sarrerakopMAX [aukeguna-1][aukeros] = sarrerakopMAX [aukeguna-1][aukeros]+sarrerakont;
+                                    System.out.println(sarrerakopMAX [aukeguna-1][aukeros]);
+                                }
+                                // lehen ez zeuden sarrerak erosita
+                                else {
+                                    sarrerak[aukeguna - 1][aukeros] = sarrerakop;
+                                    sarrerakopMAX [aukeguna-1][aukeros] = sarrerakopMAX [aukeguna-1][aukeros] + sarrerakop;
+                                    System.out.println(sarrerakopMAX [aukeguna-1][aukeros]);
+                                }
+                                // gehiago erosi nahi duzun edo ez galdetu
+                                sarrerakont = sarrerakont + sarrerakop;
+
+                                System.out.println(
+                                        "Beste pelikula batentzat sarrerak erosi nahi dituzu? (B/E) gogoratu 4 direla maximoa eta zuk "
+                                                + sarrerakont + " dituzula jada");
+                                aukeraeros = sc.next().charAt(0);
+                                if (aukeraeros == 'E') {
+                                    System.out.println("Eskerrikasko ZinemaZubietan erosteagatik");
+                                }
+                            }
+                            } else {
+                               aukeraeros = 'E';
+                            }
+                        }
+                       
+                            
+                        } 
+                        }
+                        
+                        
+                    }while (aukeraeros != 'E');
+                    
+                    
 
                     break;
                 case 2:
