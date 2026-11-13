@@ -18,14 +18,14 @@ public class Zinemazubieta {
         Scanner sc = new Scanner(System.in);
 
         // Filmen eta haien generoen informazioa gordetzeko zerrendak.
-        ArrayList<String> pelikulakList = new ArrayList<>();
-        ArrayList<String> generoakList = new ArrayList<>();
+        ArrayList<String> pelikulakList = new ArrayList<>(); //BERRIA //BERRIA //BERRIA //BERRIA 
+        ArrayList<String> generoakList = new ArrayList<>(); 
         // Film bakoitzaren genero-kodea gordetzen du; indizea filmarenarekin bat dator.
         ArrayList<Integer> generoKodeak = new ArrayList<>();
 
         // Aretoen izenak eta administraziorako erabiltzaile-izenak eta pasahitzak.
         ArrayList<String> aretoakList = new ArrayList<>();
-        ArrayList<String> erabiltzaileak = new ArrayList<>();
+        ArrayList<String> erabiltzaileak = new ArrayList<>(); //BERRIA //BERRIA //BERRIA //BERRIA 
         ArrayList<String> pasahitzak = new ArrayList<>();
 
         // Administraziorako erabiltzaile-izenak eta dagozkien pasahitzak indize berean
@@ -33,7 +33,7 @@ public class Zinemazubieta {
         erabiltzaileak.add("Oier");
         erabiltzaileak.add("Jon");
         erabiltzaileak.add("Kay");
-
+                                        //BERRIA //BERRIA //BERRIA //BERRIA 
         pasahitzak.add("1881");
         pasahitzak.add("0308");
         pasahitzak.add("3367");
@@ -56,7 +56,7 @@ public class Zinemazubieta {
 
         // Aforoaren egoera probatzeko, asteleheneko lehen bi saioak ia beteta uzten
         // dira.
-        sarrerakopMAX[0][0] = 25;
+        sarrerakopMAX[0][0] = 25; //BERRIA //BERRIA //BERRIA //BERRIA 
         sarrerakopMAX[0][1] = 23;
 
         // Hasierako filmak zerrenda dinamikoetan sartu eta bakoitzaren generoa zehazten
@@ -64,7 +64,7 @@ public class Zinemazubieta {
         for (int i = 0; i < pelikulak.length; i++) {
             pelikulakList.add(pelikulak[i]);
             generoKodeak.add(generoak[i]);
-
+                                            //BERRIA //BERRIA //BERRIA //BERRIA 
             switch (generoak[i]) {
                 case 0 ->
                     generoakList.add(" haurrentzako");
@@ -81,7 +81,7 @@ public class Zinemazubieta {
 
         // Aretoen array-a zerrenda dinamikoan kopiatzen du.
         for (int p = 0; p < gelak.length; p++) {
-            aretoakList.add(gelak[p]);
+            aretoakList.add(gelak[p]); //BERRIA //BERRIA //BERRIA //BERRIA 
         }
 
         // Kartelera matrizeak egun eta saio bakoitzean proiektatuko den filmaren
@@ -107,7 +107,7 @@ public class Zinemazubieta {
             for (int saio = 0; saio < saiokop; saio++) {
                 int pelikula;
                 int aretoa;
-                do {
+                do {                            //BERRIA //BERRIA //BERRIA //BERRIA 
                     // Zerrendako edozein pelikula hautatzen du, azkena barne.
                     pelikula = (int) (Math.random() * pelikulakList.size());
                     aretoa = generoKodeak.get(pelikula);
@@ -199,7 +199,7 @@ public class Zinemazubieta {
      */
     static void Kartelera(int aukeguna, int saiokop, String[] egunak, ArrayList<String> generoakList,
             ArrayList<String> pelikulakList,
-            String[] gelak, ArrayList<Integer> generoKodeak, int[][] kartelera) {
+            String[] gelak, ArrayList<Integer> generoKodeak, int[][] kartelera) {   
         // Hautatutako eguneko filmak, aretoak eta saio-orduak pantailan erakusten ditu.
         System.out.println(" " + egunak[aukeguna - 1] + " egunean proiektatuko diren pelikulak:");
         // Saio bakoitzean filmaren izena eta aretoaren izena lerrokatuta erakusten
@@ -296,7 +296,7 @@ public class Zinemazubieta {
             ArrayList<String> pelikulakList, ArrayList<String> generoakList, ArrayList<Integer> generoKodeak,
             int[][] kartelera, int saiokop) {
         // Administrazioan sartzeko erabiltzaile-izena eta pasahitza egiaztatu.
-        System.out.println("Sartu erabiltzailea");
+        System.out.println("Sartu erabiltzailea");      //BERRIA //BERRIA //BERRIA //BERRIA 
         String erabiltzailea = sc.next();
         if (erabiltzaileak.contains(erabiltzailea) == true) {
             System.out.println("erabiltzailea ondo jarri duzu");
@@ -313,7 +313,7 @@ public class Zinemazubieta {
                     System.out.println("");
                     System.out.println("-----------ADMINISTRAZIO ATALA-----------");
                     System.out.println("1. Pelikula berria gehitu");
-                    System.out.println("2. Pelikula baten informazioa aldatu");
+                    System.out.println("2. Pelikula baten informazioa aldatu"); //BERRIA //BERRIA //BERRIA //BERRIA 
                     System.out.println("3. Pelikula bat zerrendatik ezabatu");
                     System.out.println("4. Pelikulen zerrenda erakutsi");
                     System.out.println("5. Irten");
@@ -452,9 +452,7 @@ public class Zinemazubieta {
                 sarrerak[aukeguna - 1][aukeros] = sarrerakop;
             }
             sarrerakopMAX[aukeguna - 1][aukeros] += erosketaGuztira;
-            if (aforoaGaindituDa) {
-                System.out.println(sarrerakopMAX[aukeguna - 1][aukeros]);
-            }
+           
             return erosketaGuztira;
         }
 
@@ -479,9 +477,6 @@ public class Zinemazubieta {
         } else {
             sarrerak[aukeguna - 1][aukeros] = sarrerakop;
             sarrerakopMAX[aukeguna - 1][aukeros] += sarrerakop;
-        }
-        if (!aforoaGaindituDa) {
-            System.out.println(sarrerakopMAX[aukeguna - 1][aukeros]);
         }
         return erosketaGuztira;
     }
